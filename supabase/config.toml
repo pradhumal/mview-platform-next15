@@ -1,0 +1,4 @@
+project_id = "cgvftovcgflytvvmgoka"
+
+[functions.intelligence-engine]
+verify_jwt = false
