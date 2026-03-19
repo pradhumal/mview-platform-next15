@@ -1,0 +1,22 @@
+# dependencies
+node_modules/
+
+# macOS
+.DS_Store
+
+# build outputs
+.next/
+dist/
+build/
+
+# environment
+.env
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# repo analysis outputs
+repo-analysis-results/
+*.zip
