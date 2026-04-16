@@ -41,7 +41,7 @@ export default function HowItWorksPage() {
             How MineralView works
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            We handle the tracking so you don't have to dig through filings, reports, or maps. Here's how it works.
+            We handle the tracking so you don&apos;t have to dig through filings, reports, or maps. Here&apos;s how it works.
           </p>
         </div>
       </section>
@@ -90,22 +90,22 @@ export default function HowItWorksPage() {
           </p>
           <div className="grid sm:grid-cols-2 gap-4">
             <div className="calm-card">
-              <p className="text-foreground">"What changed near me recently?"</p>
+              <p className="text-foreground">&quot;What changed near me recently?&quot;</p>
             </div>
             <div className="calm-card">
-              <p className="text-foreground">"Why did my production change?"</p>
+              <p className="text-foreground">&quot;Why did my production change?&quot;</p>
             </div>
             <div className="calm-card">
-              <p className="text-foreground">"Is this decline normal?"</p>
+              <p className="text-foreground">&quot;Is this decline normal?&quot;</p>
             </div>
             <div className="calm-card">
-              <p className="text-foreground">"Could there be more wells here?"</p>
+              <p className="text-foreground">&quot;Could there be more wells here?&quot;</p>
             </div>
             <div className="calm-card">
-              <p className="text-foreground">"Is new drilling planned nearby?"</p>
+              <p className="text-foreground">&quot;Is new drilling planned nearby?&quot;</p>
             </div>
             <div className="calm-card">
-              <p className="text-foreground">"What usually happens next?"</p>
+              <p className="text-foreground">&quot;What usually happens next?&quot;</p>
             </div>
           </div>
         </div>
@@ -115,7 +115,7 @@ export default function HowItWorksPage() {
       <section className="px-5 md:px-8 py-16 md:py-20">
         <div className="max-w-2xl mx-auto">
           <h2 className="text-2xl md:text-3xl font-medium text-foreground mb-4 text-center">
-            What you won't see
+            What you won&apos;t see
           </h2>
           <p className="text-muted-foreground text-center mb-10">
             MineralView is built on a few principles:
@@ -123,11 +123,11 @@ export default function HowItWorksPage() {
           <div className="space-y-5 text-foreground leading-relaxed">
             <p>
               <span className="font-medium">No hype or pressure.</span>{" "}
-              We explain what's happening and show the evidence — you decide what to do.
+              We explain what&apos;s happening and show the evidence — you decide what to do.
             </p>
             <p>
               <span className="font-medium">No hidden agendas.</span>{" "}
-              We don't sell your data or steer you toward transactions.
+              We don&apos;t sell your data or steer you toward transactions.
             </p>
             <p>
               <span className="font-medium">No black-box answers.</span>{" "}
@@ -152,7 +152,7 @@ export default function HowItWorksPage() {
             Ready to understand your minerals?
           </h2>
           <p className="text-muted-foreground mb-8">
-            Add your first mineral interest and we'll help you make sense of it.
+            Add your first mineral interest and we&apos;ll help you make sense of it.
           </p>
           <Link href="/app">
             <Button size="lg">Get started</Button>

@@ -129,7 +129,7 @@ export function NotificationPreferencesSection() {
           <p className="text-xs text-muted-foreground mb-3">How often should we bundle updates?</p>
           <Select
             value={prefs.frequency}
-            onValueChange={(val) => updatePrefs({ frequency: val as any })}
+            onValueChange={(val) => updatePrefs({ frequency: val as typeof prefs.frequency })}
           >
             <SelectTrigger className="w-full">
               <SelectValue />

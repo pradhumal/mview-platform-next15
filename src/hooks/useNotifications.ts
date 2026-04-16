@@ -45,12 +45,20 @@ const DEFAULT_PREFS: Omit<NotificationPreferences, "id"> = {
   quiet_hours_end: "07:00",
 };
 
+interface NotificationsState {
+  notifications: AppNotification[];
+  unreadCount: number;
+  loading: boolean;
+}
+
 export function useNotifications() {
   const { session } = useAuth();
   const userId = session?.user?.id;
-  const [notifications, setNotifications] = useState<AppNotification[]>([]);
-  const [unreadCount, setUnreadCount] = useState(0);
-  const [loading, setLoading] = useState(true);
+  const [state, setState] = useState<NotificationsState>({
+    notifications: [],
+    unreadCount: 0,
+    loading: true,
+  });
 
   const fetchNotifications = useCallback(async () => {
     if (!userId) return;
@@ -60,23 +68,40 @@ export function useNotifications() {
       .eq("user_id", userId)
       .order("created_at", { ascending: false })
       .limit(50);
-    if (data) {
-      setNotifications(data as AppNotification[]);
-      setUnreadCount(data.filter((n) => !n.is_read).length);
-    }
-    setLoading(false);
+    setState({
+      notifications: (data ?? []) as AppNotification[],
+      unreadCount: (data ?? []).filter((n) => !n.is_read).length,
+      loading: false,
+    });
   }, [userId]);
 
   useEffect(() => {
-    fetchNotifications();
-  }, [fetchNotifications]);
+    if (!userId) return;
+    let active = true;
+    supabase
+      .from("notifications")
+      .select("*")
+      .eq("user_id", userId)
+      .order("created_at", { ascending: false })
+      .limit(50)
+      .then(({ data }) => {
+        if (!active) return;
+        setState({
+          notifications: (data ?? []) as AppNotification[],
+          unreadCount: (data ?? []).filter((n) => !n.is_read).length,
+          loading: false,
+        });
+      });
+    return () => { active = false; };
+  }, [userId]);
 
   const markAsRead = async (id: string) => {
     await supabase.from("notifications").update({ is_read: true }).eq("id", id);
-    setNotifications((prev) =>
-      prev.map((n) => (n.id === id ? { ...n, is_read: true } : n))
-    );
-    setUnreadCount((c) => Math.max(0, c - 1));
+    setState((prev) => ({
+      ...prev,
+      notifications: prev.notifications.map((n) => (n.id === id ? { ...n, is_read: true } : n)),
+      unreadCount: Math.max(0, prev.unreadCount - 1),
+    }));
   };
 
   const markAllAsRead = async () => {
@@ -86,23 +111,29 @@ export function useNotifications() {
       .update({ is_read: true })
       .eq("user_id", userId)
       .eq("is_read", false);
-    setNotifications((prev) => prev.map((n) => ({ ...n, is_read: true })));
-    setUnreadCount(0);
+    setState((prev) => ({
+      ...prev,
+      notifications: prev.notifications.map((n) => ({ ...n, is_read: true })),
+      unreadCount: 0,
+    }));
   };
 
   const deleteNotification = async (id: string) => {
     await supabase.from("notifications").delete().eq("id", id);
-    setNotifications((prev) => {
-      const removed = prev.find((n) => n.id === id);
-      if (removed && !removed.is_read) setUnreadCount((c) => Math.max(0, c - 1));
-      return prev.filter((n) => n.id !== id);
+    setState((prev) => {
+      const removed = prev.notifications.find((n) => n.id === id);
+      return {
+        notifications: prev.notifications.filter((n) => n.id !== id),
+        unreadCount: removed && !removed.is_read ? Math.max(0, prev.unreadCount - 1) : prev.unreadCount,
+        loading: prev.loading,
+      };
     });
   };
 
   return {
-    notifications,
-    unreadCount,
-    loading,
+    notifications: state.notifications,
+    unreadCount: state.unreadCount,
+    loading: state.loading,
     markAsRead,
     markAllAsRead,
     deleteNotification,

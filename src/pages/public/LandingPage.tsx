@@ -11,7 +11,7 @@ export default function LandingPage() {
       <section className="px-5 md:px-8 py-16 md:py-24">
         <div className="max-w-3xl mx-auto text-center">
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-medium text-foreground mb-6 leading-tight">
-            Understand what's happening with your minerals
+            Understand what&apos;s happening with your minerals
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground mb-6 max-w-2xl mx-auto">
             We track public oil & gas activity and explain what it means — so you know what changed, why it matters, and when nothing needs action.
@@ -42,14 +42,14 @@ export default function LandingPage() {
           </h2>
           <div className="space-y-6 text-muted-foreground text-lg">
             <p>
-              Mineral ownership is complicated. Checks change. Filings appear. Production shifts — and it's hard to know if something is wrong.
+              Mineral ownership is complicated. Checks change. Filings appear. Production shifts — and it&apos;s hard to know if something is wrong.
             </p>
             <p className="font-medium text-foreground">
               Operators have teams watching every detail.<br />
-              Most owners don't.
+              Most owners don&apos;t.
             </p>
             <p>
-              MineralView gives owners the same level of oversight — and explains what they're seeing in plain language.
+              MineralView gives owners the same level of oversight — and explains what they&apos;re seeing in plain language.
             </p>
           </div>
         </div>
@@ -82,7 +82,7 @@ export default function LandingPage() {
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-1.5 h-1.5 rounded-full bg-success mt-2 flex-shrink-0" />
-                  <span className="text-muted-foreground">Helps you know when something matters — and when it doesn't</span>
+                  <span className="text-muted-foreground">Helps you know when something matters — and when it doesn&apos;t</span>
                 </li>
               </ul>
             </div>
@@ -93,24 +93,24 @@ export default function LandingPage() {
                 <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center">
                   <EyeOff className="w-5 h-5 text-muted-foreground" />
                 </div>
-                <h3 className="text-xl font-medium text-foreground">What we don't do</h3>
+                <h3 className="text-xl font-medium text-foreground">What we don&apos;t do</h3>
               </div>
               <ul className="space-y-4">
                 <li className="flex items-start gap-3">
                   <div className="w-1.5 h-1.5 rounded-full bg-muted-foreground mt-2 flex-shrink-0" />
-                  <span className="text-muted-foreground">We don't buy minerals</span>
+                  <span className="text-muted-foreground">We don&apos;t buy minerals</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-1.5 h-1.5 rounded-full bg-muted-foreground mt-2 flex-shrink-0" />
-                  <span className="text-muted-foreground">We don't broker deals</span>
+                  <span className="text-muted-foreground">We don&apos;t broker deals</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-1.5 h-1.5 rounded-full bg-muted-foreground mt-2 flex-shrink-0" />
-                  <span className="text-muted-foreground">We don't sell your data</span>
+                  <span className="text-muted-foreground">We don&apos;t sell your data</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-1.5 h-1.5 rounded-full bg-muted-foreground mt-2 flex-shrink-0" />
-                  <span className="text-muted-foreground">We don't pressure you to act</span>
+                  <span className="text-muted-foreground">We don&apos;t pressure you to act</span>
                 </li>
               </ul>
               <p className="mt-6 text-sm text-foreground font-medium">
@@ -131,7 +131,7 @@ export default function LandingPage() {
             Built for owners who want clarity
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto text-lg">
-            MineralView isn't a trading platform or a professional analytics tool. It's built for individuals, families, and heirs who feel overwhelmed by confusing check stubs and industry jargon — and want someone in their corner.
+            MineralView isn&apos;t a trading platform or a professional analytics tool. It&apos;s built for individuals, families, and heirs who feel overwhelmed by confusing check stubs and industry jargon — and want someone in their corner.
           </p>
         </div>
       </section>
@@ -166,7 +166,7 @@ export default function LandingPage() {
             </li>
           </ul>
           <p className="text-center mt-8 font-medium text-foreground text-lg">
-            Trust isn't a feature — it's the foundation.
+            Trust isn&apos;t a feature — it&apos;s the foundation.
           </p>
         </div>
       </section>
@@ -202,7 +202,7 @@ export default function LandingPage() {
             Clarity without the complexity
           </h2>
           <p className="text-muted-foreground mb-8 text-lg">
-            Track what's happening with your minerals — with context when you need it.
+            Track what&apos;s happening with your minerals — with context when you need it.
           </p>
           <Link href="/app">
             <Button size="lg">Get started</Button>

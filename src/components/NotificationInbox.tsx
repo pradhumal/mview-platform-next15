@@ -109,7 +109,7 @@ export function NotificationInbox() {
               <Bell className="w-10 h-10 text-muted-foreground/30 mx-auto mb-3" />
               <p className="text-sm font-medium text-foreground mb-1">All caught up</p>
               <p className="text-xs text-muted-foreground">
-                We'll notify you about activity near your minerals.
+                We&apos;ll notify you about activity near your minerals.
               </p>
             </div>
           ) : (

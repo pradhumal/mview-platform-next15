@@ -203,7 +203,7 @@ export function IntelligencePanel({ isOpen, onClose }: IntelligencePanelProps) {
             </div>
             {/* Contextual page label */}
             <p className="text-2xs text-muted-foreground ml-9">
-              You're viewing: <span className="text-foreground font-medium">{getPageLabel(context)}</span>
+              You&apos;re viewing: <span className="text-foreground font-medium">{getPageLabel(context)}</span>
               {" — "}{getContextDescription(context)}
             </p>
             {/* Context chip */}

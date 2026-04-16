@@ -91,27 +91,26 @@ export function useIntelligenceContext() {
       entity: resolveEntity(path, params),
       section: resolveSection(path),
       subPage: resolveSubPage(path),
-      timestamp: Date.now(),
+      timestamp: 0, // stamped with real time in effect when pushed to history
     };
   }, [pathname, params]);
 
-  // Push to history and persist to DB when path actually changes
-  if (pathname !== lastPathRef.current) {
-    lastPathRef.current = pathname ?? "";
-    // Avoid duplicates at the head
-    if (contextHistory.length === 0 || contextHistory[0].path !== pathname) {
-      contextHistory = [currentContext, ...contextHistory].slice(0, MAX_HISTORY);
-    }
-  }
-
-  // Persist session context to database (fire-and-forget)
+  // Push to history and persist to DB when path actually changes — must run in effect.
   useEffect(() => {
+    if (pathname !== lastPathRef.current) {
+      lastPathRef.current = pathname ?? "";
+      const stamped = { ...currentContext, timestamp: Date.now() };
+      if (contextHistory.length === 0 || contextHistory[0].path !== pathname) {
+        contextHistory = [stamped, ...contextHistory].slice(0, MAX_HISTORY);
+      }
+    }
+
     updateSessionContext({
       active_entity_id: currentContext.entity?.id ?? null,
       active_entity_type: currentContext.entity?.type ?? null,
       active_view: currentContext.section,
     });
-  }, [currentContext.entity?.id, currentContext.entity?.type, currentContext.section]);
+  }, [currentContext, pathname]);
 
   const getHistory = useCallback(() => contextHistory, []);
 

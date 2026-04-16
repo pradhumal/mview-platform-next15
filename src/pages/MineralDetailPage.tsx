@@ -319,7 +319,7 @@ export default function MineralDetailPage() {
                 <p>{wellSummary.whatItIs}</p>
               </div>
               <div>
-                <p className="text-xs uppercase tracking-wide text-muted-foreground/70 mb-1">What it's doing</p>
+                <p className="text-xs uppercase tracking-wide text-muted-foreground/70 mb-1">What it&apos;s doing</p>
                 <p>{wellSummary.whatItsDoing}</p>
               </div>
               <div>

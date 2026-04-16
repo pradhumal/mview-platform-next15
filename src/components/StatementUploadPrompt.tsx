@@ -71,7 +71,7 @@ export function StatementUploadPrompt({ onUploadClick }: StatementUploadPromptPr
                       </li>
                       <li className="flex items-start gap-2">
                         <span className="text-muted-foreground/70">•</span>
-                        <span>Help you understand what's normal and what may deserve attention</span>
+                        <span>Help you understand what&apos;s normal and what may deserve attention</span>
                       </li>
                     </ul>
                   </div>

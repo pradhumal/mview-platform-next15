@@ -17,7 +17,7 @@ export default function TrustPage() {
             Trust & Privacy
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Trust isn't a feature — it's the foundation. Here's how we protect your privacy and earn your confidence.
+            Trust isn&apos;t a feature — it&apos;s the foundation. Here&apos;s how we protect your privacy and earn your confidence.
           </p>
         </div>
       </section>
@@ -33,7 +33,7 @@ export default function TrustPage() {
               <div>
                 <h3 className="font-medium text-foreground mb-2">Your information stays private</h3>
                 <p className="text-muted-foreground">
-                  We don't share your personal information, mineral interests, or activity with third parties. Your data is yours alone.
+                  We don&apos;t share your personal information, mineral interests, or activity with third parties. Your data is yours alone.
                 </p>
               </div>
             </div>
@@ -55,7 +55,7 @@ export default function TrustPage() {
                 <Database className="w-6 h-6 text-primary" />
               </div>
               <div>
-                <h3 className="font-medium text-foreground mb-2">We don't sell your data</h3>
+                <h3 className="font-medium text-foreground mb-2">We don&apos;t sell your data</h3>
                 <p className="text-muted-foreground">
                   We will never sell, trade, or monetize your personal information or the mineral interests you monitor. Our business model is simple: you pay a subscription, we provide a service.
                 </p>
@@ -127,7 +127,7 @@ export default function TrustPage() {
       <section className="px-5 md:px-8 py-16 md:py-20 bg-muted/30">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-2xl md:text-3xl font-medium text-foreground mb-6">
-            You're in control
+            You&apos;re in control
           </h2>
           <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
             Your preferences matter. You control how we communicate with you and what information you see.
@@ -160,7 +160,7 @@ export default function TrustPage() {
             Questions?
           </h2>
           <p className="text-muted-foreground mb-8">
-            If you have questions about privacy or how we handle your data, we're happy to help.
+            If you have questions about privacy or how we handle your data, we&apos;re happy to help.
           </p>
           <Link href="/app">
             <Button size="lg">Get started</Button>

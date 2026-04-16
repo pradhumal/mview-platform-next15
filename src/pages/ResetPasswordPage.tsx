@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -11,17 +11,11 @@ import { useToast } from "@/hooks/use-toast";
 export default function ResetPasswordPage() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [ready, setReady] = useState(false);
+  const [ready] = useState(() =>
+    typeof window !== "undefined" && window.location.hash.includes("type=recovery")
+  );
   const router = useRouter();
   const { toast } = useToast();
-
-  useEffect(() => {
-    // Check for recovery token in URL hash
-    const hash = window.location.hash;
-    if (hash.includes("type=recovery")) {
-      setReady(true);
-    }
-  }, []);
 
   const handleReset = async (e: React.FormEvent) => {
     e.preventDefault();

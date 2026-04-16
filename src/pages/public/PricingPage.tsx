@@ -79,7 +79,7 @@ export default function PricingPage() {
                 Is there a free trial?
               </h3>
               <p className="text-muted-foreground">
-                We don't offer a traditional free trial, but you can cancel anytime within your first month for a full refund if MineralView isn't right for you.
+                We don&apos;t offer a traditional free trial, but you can cancel anytime within your first month for a full refund if MineralView isn&apos;t right for you.
               </p>
             </div>
 
@@ -88,13 +88,13 @@ export default function PricingPage() {
                 How many minerals can I track?
               </h3>
               <p className="text-muted-foreground">
-                There's no limit. Add as many mineral interests as you need — wells, leases, or locations.
+                There&apos;s no limit. Add as many mineral interests as you need — wells, leases, or locations.
               </p>
             </div>
 
             <div>
               <h3 className="font-medium text-foreground mb-2">
-                What's included in the annual plan?
+                What&apos;s included in the annual plan?
               </h3>
               <p className="text-muted-foreground">
                 The annual plan includes everything in the monthly plan. You simply save $30 by paying upfront.
@@ -115,7 +115,7 @@ export default function PricingPage() {
                 Do you sell my data?
               </h3>
               <p className="text-muted-foreground">
-                No. Your information stays private. We don't sell, share, or monetize your data in any way.
+                No. Your information stays private. We don&apos;t sell, share, or monetize your data in any way.
               </p>
             </div>
           </div>

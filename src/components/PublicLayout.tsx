@@ -100,7 +100,7 @@ export function PublicLayout({ children }: { children: React.ReactNode }) {
                 <span className="font-semibold text-foreground">MineralView</span>
               </div>
               <p className="text-sm text-muted-foreground max-w-sm">
-                Vigilant oversight for your mineral interests. We monitor the data so you don't have to decipher complex stubs alone.
+                Vigilant oversight for your mineral interests. We monitor the data so you don&apos;t have to decipher complex stubs alone.
               </p>
             </div>
 

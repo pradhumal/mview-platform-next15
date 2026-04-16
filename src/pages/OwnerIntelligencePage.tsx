@@ -83,6 +83,7 @@ export default function OwnerIntelligencePage() {
   useEffect(() => {
     async function loadContext() {
       try {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const promises: Promise<any>[] = [
           getStatusSummary(),
           getIntelligenceContext(),

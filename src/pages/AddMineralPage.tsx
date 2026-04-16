@@ -152,7 +152,7 @@ export default function AddMineralPage() {
                 className="h-12"
               />
               <p className="text-xs text-muted-foreground mt-2">
-                Give it a name you'll recognize. You can change this later.
+                Give it a name you&apos;ll recognize. You can change this later.
               </p>
             </div>
 

@@ -117,7 +117,7 @@ export default function ProductionPage() {
         </Link>
         <h1 className="text-xl md:text-2xl text-foreground mb-1">Production</h1>
         <p className="text-sm text-muted-foreground">
-          Monthly production history and trends — decline is normal. Intelligence can help interpret what you're seeing.
+          Monthly production history and trends — decline is normal. Intelligence can help interpret what you&apos;re seeing.
         </p>
       </header>
 
@@ -154,7 +154,7 @@ export default function ProductionPage() {
           <p className="text-sm text-foreground mb-1">About production trends</p>
           <p className="text-xs text-muted-foreground leading-relaxed mb-3">
             Production decline is normal for most wells. What matters is whether the decline rate
-            is within expected ranges for the well's age and type.
+            is within expected ranges for the well&apos;s age and type.
           </p>
           <FollowUpPrompts prompts={productionPrompts} context="production-overview" />
         </div>

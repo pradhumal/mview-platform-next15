@@ -33,7 +33,7 @@ export default function AdvancedDeclinePage() {
       d.setMonth(d.getMonth() + i);
       const label = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
       proj = Math.round(proj * (1 - monthlyDecline));
-      chartData.push({ date: label, actual: undefined as any, projected: proj });
+      chartData.push({ date: label, actual: undefined as unknown as number, projected: proj });
     }
   }
 
