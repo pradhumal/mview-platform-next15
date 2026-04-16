@@ -1,4 +1,7 @@
-import { Link, Outlet, useLocation } from "react-router-dom";
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Layers } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -9,8 +12,8 @@ const navLinks = [
   { to: "/trust", label: "Trust & Privacy" },
 ];
 
-export function PublicLayout() {
-  const location = useLocation();
+export function PublicLayout({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
 
   return (
     <div className="min-h-screen bg-background">
@@ -19,7 +22,7 @@ export function PublicLayout() {
         <div className="max-w-6xl mx-auto px-5 md:px-8">
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-3">
+            <Link href="/" className="flex items-center gap-3">
               <div className="w-9 h-9 rounded-xl bg-primary flex items-center justify-center">
                 <Layers className="w-5 h-5 text-primary-foreground" />
               </div>
@@ -31,10 +34,10 @@ export function PublicLayout() {
               {navLinks.map((link) => (
                 <Link
                   key={link.to}
-                  to={link.to}
+                  href={link.to}
                   className={cn(
                     "text-sm transition-colors",
-                    location.pathname === link.to
+                    pathname === link.to
                       ? "text-foreground font-medium"
                       : "text-muted-foreground hover:text-foreground"
                   )}
@@ -46,12 +49,12 @@ export function PublicLayout() {
 
             {/* CTA */}
             <div className="flex items-center gap-3">
-              <Link to="/app">
+              <Link href="/auth">
                 <Button variant="ghost" size="sm" className="hidden sm:inline-flex">
                   Sign in
                 </Button>
               </Link>
-              <Link to="/app">
+              <Link href="/auth">
                 <Button size="sm">Get started</Button>
               </Link>
             </div>
@@ -65,10 +68,10 @@ export function PublicLayout() {
           {navLinks.map((link) => (
             <Link
               key={link.to}
-              to={link.to}
+              href={link.to}
               className={cn(
                 "text-sm transition-colors",
-                location.pathname === link.to
+                pathname === link.to
                   ? "text-foreground font-medium"
                   : "text-muted-foreground"
               )}
@@ -81,7 +84,7 @@ export function PublicLayout() {
 
       {/* Content */}
       <main>
-        <Outlet />
+        {children}
       </main>
 
       {/* Footer */}
@@ -106,12 +109,12 @@ export function PublicLayout() {
               <h4 className="font-medium text-foreground mb-3 text-sm">Product</h4>
               <ul className="space-y-2">
                 <li>
-                  <Link to="/how-it-works" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  <Link href="/how-it-works" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                     How it works
                   </Link>
                 </li>
                 <li>
-                  <Link to="/pricing" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  <Link href="/pricing" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                     Pricing
                   </Link>
                 </li>
@@ -122,7 +125,7 @@ export function PublicLayout() {
               <h4 className="font-medium text-foreground mb-3 text-sm">Company</h4>
               <ul className="space-y-2">
                 <li>
-                  <Link to="/trust" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  <Link href="/trust" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                     Trust & Privacy
                   </Link>
                 </li>

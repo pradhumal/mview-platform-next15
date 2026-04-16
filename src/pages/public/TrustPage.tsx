@@ -1,4 +1,6 @@
-import { Link } from "react-router-dom";
+"use client";
+
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Shield, Lock, Eye, Database } from "lucide-react";
 
@@ -160,7 +162,7 @@ export default function TrustPage() {
           <p className="text-muted-foreground mb-8">
             If you have questions about privacy or how we handle your data, we're happy to help.
           </p>
-          <Link to="/app">
+          <Link href="/app">
             <Button size="lg">Get started</Button>
           </Link>
         </div>

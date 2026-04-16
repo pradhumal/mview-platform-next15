@@ -1,4 +1,6 @@
-import { Link } from "react-router-dom";
+"use client";
+
+import Link from "next/link";
 import { Layers, Activity, Map, FileText, ChevronRight, Sparkles, TrendingDown } from "lucide-react";
 import { useState, useEffect } from "react";
 import { getMyMinerals, getActivityFeed, getReportsIndex } from "@/lib/dataService";
@@ -94,7 +96,7 @@ export default function DataExplorerPage() {
           <p className="text-xs text-muted-foreground">Intelligence can explain what changed and whether it matters</p>
         </div>
         <Link
-          to="/app"
+          href="/app"
           className="flex items-center gap-1 text-sm text-primary font-medium hover:underline flex-shrink-0"
         >
           Ask
@@ -119,7 +121,7 @@ export default function DataExplorerPage() {
           sections.map((section) => (
             <Link
               key={section.title}
-              to={section.to}
+              href={section.to}
               className="calm-card flex items-center gap-4 hover:border-primary/20 transition-colors"
             >
               <div className="w-11 h-11 rounded-xl bg-secondary flex items-center justify-center flex-shrink-0">

@@ -1,4 +1,6 @@
-import { Link } from "react-router-dom";
+"use client";
+
+import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import type { SourceLink, ObjectUsed } from "@/lib/domain/responseSchema";
 

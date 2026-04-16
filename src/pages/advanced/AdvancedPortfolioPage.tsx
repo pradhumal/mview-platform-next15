@@ -1,3 +1,5 @@
+"use client";
+
 import { Briefcase, MapPin, ShieldCheck, AlertTriangle } from "lucide-react";
 import { mockMinerals } from "@/lib/mock";
 

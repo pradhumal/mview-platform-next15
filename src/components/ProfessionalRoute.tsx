@@ -1,4 +1,7 @@
-import { Navigate } from "react-router-dom";
+"use client";
+
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
 
 /**
@@ -7,10 +10,16 @@ import { useAuth } from "@/contexts/AuthContext";
  */
 export function ProfessionalRoute({ children }: { children: React.ReactNode }) {
   const { profile } = useAuth();
+  const router = useRouter();
 
-  if (profile?.role !== "professional") {
-    return <Navigate to="/app" replace />;
-  }
+  useEffect(() => {
+    if (profile && profile.role !== "professional") {
+      router.replace("/app");
+    }
+  }, [profile, router]);
+
+  if (profile?.role !== "professional") return null;
 
   return <>{children}</>;
 }
+

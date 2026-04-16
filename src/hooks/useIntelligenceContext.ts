@@ -1,4 +1,6 @@
-import { useLocation, useParams } from "react-router-dom";
+"use client";
+
+import { usePathname, useParams } from "next/navigation";
 import { useMemo, useRef, useCallback, useEffect } from "react";
 import { updateSessionContext } from "@/lib/dataService";
 
@@ -74,12 +76,15 @@ function resolveSubPage(path: string): string | undefined {
  * a rolling history of the last 5 contexts per session.
  */
 export function useIntelligenceContext() {
-  const location = useLocation();
-  const params = useParams();
+  const pathname = usePathname();
+  const rawParams = useParams();
+  const params: Record<string, string | undefined> = Object.fromEntries(
+    Object.entries(rawParams).map(([k, v]) => [k, Array.isArray(v) ? v[0] : v])
+  );
   const lastPathRef = useRef<string>("");
 
   const currentContext = useMemo<PageContext>(() => {
-    const path = location.pathname;
+    const path = pathname ?? "";
     return {
       label: resolveLabel(path, params),
       path,
@@ -88,13 +93,13 @@ export function useIntelligenceContext() {
       subPage: resolveSubPage(path),
       timestamp: Date.now(),
     };
-  }, [location.pathname, params]);
+  }, [pathname, params]);
 
   // Push to history and persist to DB when path actually changes
-  if (location.pathname !== lastPathRef.current) {
-    lastPathRef.current = location.pathname;
+  if (pathname !== lastPathRef.current) {
+    lastPathRef.current = pathname ?? "";
     // Avoid duplicates at the head
-    if (contextHistory.length === 0 || contextHistory[0].path !== location.pathname) {
+    if (contextHistory.length === 0 || contextHistory[0].path !== pathname) {
       contextHistory = [currentContext, ...contextHistory].slice(0, MAX_HISTORY);
     }
   }

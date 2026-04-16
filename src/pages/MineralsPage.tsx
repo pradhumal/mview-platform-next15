@@ -1,7 +1,9 @@
+"use client";
+
 import { useState, useEffect } from "react";
 import { MapPin, ChevronRight, Plus, AlertCircle, Layers, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { EmptyState } from "@/components/EmptyState";
 import { MineralCardSkeleton } from "@/components/LoadingSkeleton";
 import { getMyMinerals, type MineralInterest } from "@/lib/dataService";
@@ -85,7 +87,7 @@ export default function MineralsPage() {
 
       {/* Add button */}
       {featureFlags.addMineral && (
-        <Link to="/app/explore/minerals/add">
+        <Link href="/app/explore/minerals/add">
           <Button variant="outline" className="w-full mb-6 h-12 gap-2">
             <Plus className="w-4 h-4" />
             Add mineral interest
@@ -98,7 +100,7 @@ export default function MineralsPage() {
         {minerals.map((mineral) => (
           <Link
             key={mineral.id}
-            to={`/app/explore/minerals/${mineral.id}`}
+            href={`/app/explore/minerals/${mineral.id}`}
             className="block calm-card hover:border-primary/20 transition-colors"
           >
             <div className="flex items-start justify-between gap-4">
@@ -130,7 +132,7 @@ export default function MineralsPage() {
               
               <div className="flex items-center gap-2">
                 <Link 
-                  to={`/app/explore/minerals/${mineral.id}?settings=true`}
+                  href={`/app/explore/minerals/${mineral.id}?settings=true`}
                   onClick={(e) => e.stopPropagation()}
                   className="p-2 rounded-lg hover:bg-muted text-muted-foreground/50 hover:text-muted-foreground transition-colors"
                 >

@@ -1,4 +1,6 @@
-import { Link } from "react-router-dom";
+"use client";
+
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { MapPin, Bell, MessageCircle, Settings } from "lucide-react";
 
@@ -152,7 +154,7 @@ export default function HowItWorksPage() {
           <p className="text-muted-foreground mb-8">
             Add your first mineral interest and we'll help you make sense of it.
           </p>
-          <Link to="/app">
+          <Link href="/app">
             <Button size="lg">Get started</Button>
           </Link>
         </div>

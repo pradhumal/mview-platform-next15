@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { FileText, Filter, AlertTriangle, CheckCircle2, Clock } from "lucide-react";
 import { mockReports } from "@/lib/mock";

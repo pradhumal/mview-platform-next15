@@ -1,5 +1,8 @@
+"use client";
+
 import { useState, useEffect } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import Link from "next/link";
+import { useParams, useRouter } from "next/navigation";
 import { 
   ArrowLeft, 
   MapPin, 
@@ -59,8 +62,8 @@ function StatusBadge({ status }: { status: "producing" | "permitted" | "inactive
 }
 
 export default function MineralDetailPage() {
-  const { id } = useParams();
-  const navigate = useNavigate();
+  const { id } = useParams<{ id: string }>();
+  const router = useRouter();
   
   const [isLoading, setIsLoading] = useState(true);
   const [mineral, setMineral] = useState<MineralInterest | null>(null);
@@ -157,7 +160,7 @@ export default function MineralDetailPage() {
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
           <p className="text-muted-foreground mb-4">Interest not found</p>
-          <Link to="/app/explore/minerals">
+          <Link href="/app/explore/minerals">
             <Button variant="outline">Back to Minerals</Button>
           </Link>
         </div>
@@ -172,7 +175,7 @@ export default function MineralDetailPage() {
         <div className="px-5 py-4 md:px-8">
           <div className="flex items-center gap-3">
             <button 
-              onClick={() => navigate(-1)}
+              onClick={() => router.back()}
               className="p-2 -ml-2 rounded-lg hover:bg-muted transition-colors"
             >
               <ArrowLeft className="w-5 h-5 text-foreground" />
@@ -333,13 +336,13 @@ export default function MineralDetailPage() {
 
         {/* Actions */}
         <div className="flex gap-3">
-          <Link to="/app/explore/map" className="flex-1">
+          <Link href="/app/explore/map" className="flex-1">
             <Button variant="outline" className="w-full">
               <MapPin className="w-4 h-4 mr-2" />
               View on map
             </Button>
           </Link>
-          <Link to={`/app?interest=${id}`} className="flex-1">
+          <Link href={`/app?interest=${id}`} className="flex-1">
             <Button className="w-full">
               Ask about this
             </Button>

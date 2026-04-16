@@ -1,5 +1,7 @@
+"use client";
+
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import Link from "next/link";
 import {
   Users, TrendingDown, FileText, Activity, Briefcase, ShieldCheck,
   ChevronRight, ArrowRight
@@ -46,7 +48,7 @@ export default function AdvancedViewPage() {
         {sections.map((s) => (
           <Link
             key={s.to}
-            to={s.to}
+            href={s.to}
             className="flex items-center gap-3 calm-card !p-4 hover:bg-secondary/40 transition-colors group"
           >
             <div className="w-9 h-9 rounded-lg bg-accent flex items-center justify-center flex-shrink-0">

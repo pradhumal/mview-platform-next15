@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect, useMemo } from "react";
 import { Sparkles, ChevronRight, AlertCircle } from "lucide-react";
 import { getSnapshot, composeExplainPage } from "@/lib/domain";

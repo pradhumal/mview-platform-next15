@@ -1,7 +1,9 @@
+"use client";
+
 import { useState } from "react";
 import { ChevronRight, Shield, Briefcase, User, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { NotificationPreferencesSection } from "@/components/settings/NotificationPreferencesSection";
@@ -58,7 +60,7 @@ export default function SettingsPage() {
         
         <div className="calm-card divide-y divide-border/50">
           <Link
-            to="/trust"
+            href="/trust"
             className="flex items-center justify-between py-4 first:pt-0 last:pb-0 group"
           >
             <div>
@@ -73,7 +75,7 @@ export default function SettingsPage() {
           </Link>
           
           <Link
-            to="/trust"
+            href="/trust"
             className="flex items-center justify-between py-4 first:pt-0 last:pb-0 group"
           >
             <div>
@@ -88,7 +90,7 @@ export default function SettingsPage() {
           </Link>
           
           <Link
-            to="/trust"
+            href="/trust"
             className="flex items-center justify-between py-4 first:pt-0 last:pb-0 group"
           >
             <div>

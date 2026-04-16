@@ -1,5 +1,5 @@
 import { MapPin } from "lucide-react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
 export function MiniActivityMap() {
   return (
@@ -12,7 +12,7 @@ export function MiniActivityMap() {
           <span className="text-xs font-medium text-foreground">Nearby Activity</span>
         </div>
         <Link 
-          to="/app/explore/map"
+          href="/app/explore/map"
           className="text-xs text-primary hover:underline"
         >
           Open map

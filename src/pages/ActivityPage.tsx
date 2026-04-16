@@ -1,6 +1,8 @@
+"use client";
+
 import { useState, useEffect, useCallback } from "react";
 import { FileText, Droplets, TrendingUp, MapPin, ChevronRight, Activity, Hammer, Truck } from "lucide-react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { EmptyState } from "@/components/EmptyState";
 import { ActivityCardSkeleton } from "@/components/LoadingSkeleton";
 import { FollowUpPrompts, activityPrompts, emptyStatePrompts } from "@/components/FollowUpPrompts";
@@ -209,14 +211,14 @@ export default function ActivityPage() {
                 {/* Actions */}
                 <div className="flex items-center gap-4 pt-3 border-t border-border/50">
                   <Link 
-                    to={`/app/explore/minerals/${item.relatedMineralId}`}
+                    href={`/app/explore/minerals/${item.relatedMineralId}`}
                     className="action-link"
                   >
                     View interest
                     <ChevronRight className="w-3.5 h-3.5" />
                   </Link>
                   <Link 
-                    to="/app/explore/map"
+                    href="/app/explore/map"
                     className="action-link"
                   >
                     View on map

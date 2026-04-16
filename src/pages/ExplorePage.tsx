@@ -1,5 +1,7 @@
+"use client";
+
 import { useCallback } from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { Map, Activity, FileText, Layers } from "lucide-react";
 import { TravelingIntelligence } from "@/components/TravelingIntelligence";
 
@@ -27,7 +29,7 @@ export default function ExplorePage() {
         {sections.map((s) => (
           <Link
             key={s.label}
-            to={s.to}
+            href={s.to}
             className="calm-card flex items-start gap-4 hover:border-primary/30 transition-colors"
           >
             <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center flex-shrink-0">

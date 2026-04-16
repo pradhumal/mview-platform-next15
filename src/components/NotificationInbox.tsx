@@ -1,10 +1,12 @@
+"use client";
+
 import { useState } from "react";
 import { Bell, CheckCheck, Trash2, MapPin, TrendingDown, FileText, RefreshCw, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { useNotifications, type AppNotification, type NotificationCategory } from "@/hooks/useNotifications";
 import { formatDistanceToNow } from "date-fns";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 
 const CATEGORY_META: Record<NotificationCategory, { icon: typeof Bell; label: string }> = {
   changes_since_last_visit: { icon: RefreshCw, label: "What's changed" },
@@ -67,11 +69,11 @@ function NotificationItem({
 export function NotificationInbox() {
   const { notifications, unreadCount, loading, markAsRead, markAllAsRead, deleteNotification } = useNotifications();
   const [open, setOpen] = useState(false);
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const handleNavigate = (url: string) => {
     setOpen(false);
-    navigate(url);
+    router.push(url);
   };
 
   return (

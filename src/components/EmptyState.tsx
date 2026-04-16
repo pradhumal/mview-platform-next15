@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { LucideIcon } from "lucide-react";
 
@@ -23,7 +23,7 @@ export function EmptyState({ icon: Icon, title, description, action, children }:
       <h3 className="text-lg font-medium text-foreground mb-2">{title}</h3>
       <p className="text-sm text-muted-foreground max-w-xs mb-6">{description}</p>
       {action && (
-        <Link to={action.to}>
+        <Link href={action.to}>
           <Button>{action.label}</Button>
         </Link>
       )}
@@ -31,3 +31,4 @@ export function EmptyState({ icon: Icon, title, description, action, children }:
     </div>
   );
 }
+

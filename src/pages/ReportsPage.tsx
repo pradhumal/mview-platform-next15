@@ -1,5 +1,7 @@
+"use client";
+
 import { useState, useEffect, useCallback } from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { ArrowLeft, FileText, AlertCircle, ChevronRight, Clock, CheckCircle } from "lucide-react";
 import { FollowUpPrompts, reportPrompts, emptyStatePrompts } from "@/components/FollowUpPrompts";
 import { getReportsIndex, type Report } from "@/lib/dataService";
@@ -65,7 +67,7 @@ export default function ReportsPage() {
       <div className="px-5 py-8 md:px-8 md:py-12 animate-fade-in">
         <header className="mb-6">
           <Link
-            to="/app/explore"
+            href="/app/explore"
             className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground mb-3 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
@@ -91,7 +93,7 @@ export default function ReportsPage() {
       {/* Header */}
       <header className="mb-6">
         <Link
-          to="/app/explore"
+          href="/app/explore"
           className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground mb-3 transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
@@ -177,7 +179,7 @@ export default function ReportsPage() {
           return (
             <Link
               key={report.id}
-              to={`/app/explore/reports/${report.id}`}
+              href={`/app/explore/reports/${report.id}`}
               className="calm-card block hover:border-primary/20 transition-colors"
             >
               <div className="flex items-start gap-3">

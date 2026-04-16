@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useRef, useEffect } from "react";
 import { Send, X, Sparkles, Minimize2, MapPin, Clock, ShieldCheck, AlertTriangle, Info, History, Eye, RefreshCw, Layers } from "lucide-react";
 import { Button } from "@/components/ui/button";

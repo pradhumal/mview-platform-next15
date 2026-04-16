@@ -1,7 +1,10 @@
+"use client";
+
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Send, Sparkles, MapPin, TrendingDown, FileText, Upload, X, Loader2, HelpCircle, Eye, Bell, History } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Link, useSearchParams, useLocation } from "react-router-dom";
+import Link from "next/link";
+import { useSearchParams} from "next/navigation";
 import { MiniProductionChart } from "@/components/intelligence/MiniProductionChart";
 import { StatementUploadPrompt } from "@/components/StatementUploadPrompt";
 import { MiniActivityMap } from "@/components/intelligence/MiniActivityMap";
@@ -51,8 +54,7 @@ interface Message {
 type ContextMode = "simple" | "detailed";
 
 export default function OwnerIntelligencePage() {
-  const [searchParams] = useSearchParams();
-  const location = useLocation();
+  const searchParams = useSearchParams();
   const { user } = useAuth();
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
@@ -623,7 +625,7 @@ export default function OwnerIntelligencePage() {
                         {message.actions.map((action) => (
                           <Link
                             key={action.label}
-                            to={action.to}
+                            href={action.to}
                             className="action-link"
                           >
                             {action.label}

@@ -1,5 +1,7 @@
+"use client";
+
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 import { ArrowLeft, Search, MapPin, FileText, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,7 +9,7 @@ import { Input } from "@/components/ui/input";
 type AddMethod = "api" | "legal" | "map";
 
 export default function AddMineralPage() {
-  const navigate = useNavigate();
+  const router = useRouter();
   const [method, setMethod] = useState<AddMethod | null>(null);
   const [searchValue, setSearchValue] = useState("");
   const [interestName, setInterestName] = useState("");
@@ -39,7 +41,7 @@ export default function AddMineralPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // In production, this would save to database
-    navigate("/app/explore/minerals");
+    router.push("/app/explore/minerals");
   };
 
   return (
@@ -49,7 +51,7 @@ export default function AddMineralPage() {
         <div className="px-5 py-4 md:px-8">
           <div className="flex items-center gap-3">
             <button 
-              onClick={() => navigate(-1)}
+              onClick={() => router.back()}
               className="p-2 -ml-2 rounded-lg hover:bg-muted transition-colors"
             >
               <ArrowLeft className="w-5 h-5 text-foreground" />

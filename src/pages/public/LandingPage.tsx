@@ -1,4 +1,6 @@
-import { Link } from "react-router-dom";
+"use client";
+
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Shield, Eye, EyeOff, Heart } from "lucide-react";
 
@@ -18,12 +20,12 @@ export default function LandingPage() {
             MineralView brings clarity to complex filings, production changes, and check stubs using plain-language explanation — while keeping the underlying data fully accessible if you want to explore further. No hype. No sales pressure. Just context.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link to="/app">
+            <Link href="/app">
               <Button size="lg" className="min-w-[180px]">
                 Get started
               </Button>
             </Link>
-            <Link to="/how-it-works">
+            <Link href="/how-it-works">
               <Button variant="outline" size="lg" className="min-w-[180px]">
                 Learn how it works
               </Button>
@@ -186,7 +188,7 @@ export default function LandingPage() {
             <p className="text-sm text-muted-foreground mb-6">
               No contracts. Cancel anytime.
             </p>
-            <Link to="/app">
+            <Link href="/app">
               <Button className="w-full">Get started</Button>
             </Link>
           </div>
@@ -202,7 +204,7 @@ export default function LandingPage() {
           <p className="text-muted-foreground mb-8 text-lg">
             Track what's happening with your minerals — with context when you need it.
           </p>
-          <Link to="/app">
+          <Link href="/app">
             <Button size="lg">Get started</Button>
           </Link>
         </div>

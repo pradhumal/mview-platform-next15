@@ -1,4 +1,6 @@
-import { Link } from "react-router-dom";
+"use client";
+
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
 
@@ -52,7 +54,7 @@ export default function PricingPage() {
               ))}
             </ul>
 
-            <Link to="/app">
+            <Link href="/app">
               <Button className="w-full" size="lg">
                 Get started
               </Button>
@@ -129,7 +131,7 @@ export default function PricingPage() {
           <p className="text-muted-foreground mb-8">
             Know what changed. Know when it matters. No constant checking required.
           </p>
-          <Link to="/app">
+          <Link href="/app">
             <Button size="lg">Get started</Button>
           </Link>
         </div>

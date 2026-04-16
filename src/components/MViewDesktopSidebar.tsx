@@ -1,4 +1,7 @@
-import { Link, useLocation } from "react-router-dom";
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Sparkles, Compass, Wrench, Map, Activity, Layers, FileText, LogOut } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { featureFlags } from "@/lib/featureFlags";
@@ -8,10 +11,10 @@ interface Props {
 }
 
 export function MViewDesktopSidebar({ role }: Props) {
-  const location = useLocation();
+  const pathname = usePathname();
   const { signOut, profile } = useAuth();
-  const isExploreSection = location.pathname.includes("/explore");
-  const isAdvancedSection = location.pathname.includes("/advanced");
+  const isExploreSection = pathname.includes("/explore");
+  const isAdvancedSection = pathname.includes("/advanced");
 
   const mainNav = [
     { icon: Sparkles, label: "Intelligence", to: "/app" },
@@ -37,12 +40,12 @@ export function MViewDesktopSidebar({ role }: Props) {
 
   const isActive = (to: string) =>
     to === "/app"
-      ? location.pathname === "/app" || location.pathname === "/app/"
-      : location.pathname.startsWith(to);
+      ? pathname === "/app" || pathname === "/app/"
+      : pathname.startsWith(to);
 
   return (
     <aside className="hidden md:flex flex-col w-56 h-screen sticky top-0 border-r border-border/50 bg-sidebar p-4">
-      <Link to="/app" className="flex items-center gap-2 px-2 mb-8">
+      <Link href="/app" className="flex items-center gap-2 px-2 mb-8">
         <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
           <Sparkles className="w-4 h-4 text-primary" />
         </div>
@@ -53,7 +56,7 @@ export function MViewDesktopSidebar({ role }: Props) {
         {mainNav.map((item) => (
           <div key={item.label}>
             <Link
-              to={item.to}
+              href={item.to}
               className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors ${
                 isActive(item.to)
                   ? "bg-primary/10 text-primary"
@@ -69,9 +72,9 @@ export function MViewDesktopSidebar({ role }: Props) {
                 {exploreSubItems.map((sub) => (
                   <Link
                     key={sub.label}
-                    to={sub.to}
+                    href={sub.to}
                     className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm transition-colors ${
-                      location.pathname.startsWith(sub.to)
+                      pathname.startsWith(sub.to)
                         ? "text-primary font-medium"
                         : "text-muted-foreground hover:text-foreground"
                     }`}
@@ -88,9 +91,9 @@ export function MViewDesktopSidebar({ role }: Props) {
                 {advancedSubItems.map((sub) => (
                   <Link
                     key={sub.label}
-                    to={sub.to}
+                    href={sub.to}
                     className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm transition-colors ${
-                      location.pathname.startsWith(sub.to)
+                      pathname.startsWith(sub.to)
                         ? "text-primary font-medium"
                         : "text-muted-foreground hover:text-foreground"
                     }`}

@@ -1,5 +1,7 @@
+"use client";
+
 import { useState, useEffect, useCallback } from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { ArrowLeft, TrendingDown, TrendingUp, Minus, ChevronRight, Info } from "lucide-react";
 import { AreaChart, Area, ResponsiveContainer, XAxis, YAxis, Tooltip } from "recharts";
 import { FollowUpPrompts, productionPrompts } from "@/components/FollowUpPrompts";
@@ -80,7 +82,7 @@ export default function ProductionPage() {
       <div className="px-5 py-8 md:px-8 md:py-12 animate-fade-in">
         <header className="mb-6">
           <Link
-            to="/app/explore"
+            href="/app/explore"
             className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground mb-3 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
@@ -107,7 +109,7 @@ export default function ProductionPage() {
       {/* Header */}
       <header className="mb-6">
         <Link
-          to="/app/explore"
+          href="/app/explore"
           className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground mb-3 transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
@@ -170,7 +172,7 @@ export default function ProductionPage() {
           return (
             <Link
               key={summary.wellId}
-              to={`/app/explore/minerals/${summary.wellId}`}
+              href={`/app/explore/minerals/${summary.wellId}`}
               className="calm-card block hover:border-primary/20 transition-colors"
             >
               {/* Well Header */}

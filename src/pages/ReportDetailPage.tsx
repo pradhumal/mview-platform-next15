@@ -1,5 +1,8 @@
+"use client";
+
 import { useState, useEffect } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import Link from "next/link";
+import { useParams, useRouter } from "next/navigation";
 import { ArrowLeft, FileText, Download, ExternalLink, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FollowUpPrompts, reportPrompts } from "@/components/FollowUpPrompts";
@@ -7,8 +10,8 @@ import { getReportDetail, type ReportDetail } from "@/lib/dataService";
 import ReactMarkdown from "react-markdown";
 
 export default function ReportDetailPage() {
-  const { id } = useParams();
-  const navigate = useNavigate();
+  const { id } = useParams<{ id: string }>();
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
   const [report, setReport] = useState<ReportDetail | null>(null);
 
@@ -32,7 +35,7 @@ export default function ReportDetailPage() {
       <div className="px-5 py-8 md:px-8 md:py-12 animate-fade-in">
         <header className="mb-6">
           <button
-            onClick={() => navigate(-1)}
+            onClick={() => router.back()}
             className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground mb-3 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
@@ -50,7 +53,7 @@ export default function ReportDetailPage() {
       <div className="px-5 py-8 md:px-8 md:py-12">
         <header className="mb-6">
           <button
-            onClick={() => navigate(-1)}
+            onClick={() => router.back()}
             className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground mb-3 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
@@ -58,7 +61,7 @@ export default function ReportDetailPage() {
           </button>
           <h1 className="text-xl text-foreground">Report not found</h1>
         </header>
-        <Link to="/app/explore/reports">
+        <Link href="/app/explore/reports">
           <Button variant="outline">Back to Reports</Button>
         </Link>
       </div>
@@ -70,7 +73,7 @@ export default function ReportDetailPage() {
       {/* Header */}
       <header className="mb-6">
         <button
-          onClick={() => navigate(-1)}
+          onClick={() => router.back()}
           className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground mb-3 transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
@@ -113,7 +116,7 @@ export default function ReportDetailPage() {
       {/* Related Interest */}
       {report.relatedMineralName && (
         <Link
-          to={`/app/explore/minerals/${report.relatedMineralId}`}
+          href={`/app/explore/minerals/${report.relatedMineralId}`}
           className="calm-card mb-6 flex items-center justify-between hover:border-primary/20 transition-colors"
         >
           <div>

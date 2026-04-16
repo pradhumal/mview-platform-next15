@@ -1,4 +1,6 @@
-import { Outlet, useLocation } from "react-router-dom";
+"use client";
+
+import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { MViewBottomNav } from "./MViewBottomNav";
 import { MViewDesktopSidebar } from "./MViewDesktopSidebar";
@@ -9,8 +11,8 @@ import { Sparkles } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { touchOwnerLastSeen } from "@/lib/dataService";
 
-export function MViewAppLayout() {
-  const location = useLocation();
+export function MViewAppLayout({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
   const { profile } = useAuth();
   const [showIntelligence, setShowIntelligence] = useState(false);
 
@@ -28,7 +30,7 @@ export function MViewAppLayout() {
     return () => window.removeEventListener("open-intelligence", handler);
   }, []);
   
-  const isIntelligenceTab = location.pathname === "/app" || location.pathname === "/app/";
+  const isIntelligenceTab = pathname === "/app" || pathname === "/app/";
   const role = profile?.role || "owner";
   
   return (
@@ -42,7 +44,7 @@ export function MViewAppLayout() {
             <NotificationInbox />
             <SettingsSheet />
           </div>
-          <Outlet />
+          {children}
         </div>
       </main>
       
@@ -66,3 +68,4 @@ export function MViewAppLayout() {
     </div>
   );
 }
+

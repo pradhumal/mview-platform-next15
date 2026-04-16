@@ -1,5 +1,7 @@
+"use client";
+
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
@@ -11,7 +13,7 @@ export default function OnboardingPage() {
   const [role, setRole] = useState<RoleChoice | null>(null);
   const [loading, setLoading] = useState(false);
   const { user, refreshProfile } = useAuth();
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const handleContinue = async () => {
     if (!role || !user) return;
@@ -25,7 +27,7 @@ export default function OnboardingPage() {
 
     await refreshProfile();
     setLoading(false);
-    navigate("/app");
+    router.push("/app");
   };
 
   const roleOptions: { value: RoleChoice; icon: typeof User; title: string; desc: string }[] = [

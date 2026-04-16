@@ -1,16 +1,18 @@
-import { Outlet, useLocation } from "react-router-dom";
+"use client";
+
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { BottomNav } from "./BottomNav";
 import { DesktopSidebar } from "./DesktopSidebar";
 import { IntelligencePanel } from "./IntelligencePanel";
 import { Sparkles } from "lucide-react";
 
-export function AppLayout() {
-  const location = useLocation();
+export function AppLayout({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
   const [showIntelligence, setShowIntelligence] = useState(false);
   
   // Check if we're in the Data Explorer section (should show floating intelligence button)
-  const isExploreSection = location.pathname.includes("/explore");
+  const isExploreSection = pathname.includes("/explore");
   
   return (
     <div className="min-h-screen flex w-full bg-background">
@@ -18,7 +20,7 @@ export function AppLayout() {
       
       <main className="flex-1 pb-20 md:pb-0">
         <div className="max-w-3xl mx-auto">
-          <Outlet />
+          {children}
         </div>
       </main>
       
@@ -43,3 +45,4 @@ export function AppLayout() {
     </div>
   );
 }
+

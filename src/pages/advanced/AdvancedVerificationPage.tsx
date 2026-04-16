@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { ShieldCheck, AlertTriangle, Clock, CheckCircle2, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";

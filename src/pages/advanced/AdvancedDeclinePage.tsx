@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { TrendingDown, Info } from "lucide-react";
 import { mockDeclineSummaries, mockProductionSeries } from "@/lib/mock";

@@ -1,10 +1,25 @@
-import { Navigate, useLocation } from "react-router-dom";
+"use client";
+
+import { useEffect } from "react";
+import { useRouter, usePathname } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
 import { Loader2 } from "lucide-react";
 
 export function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { user, profile, loading } = useAuth();
-  const location = useLocation();
+  const router = useRouter();
+  const pathname = usePathname();
+
+  useEffect(() => {
+    if (loading) return;
+    if (!user) {
+      router.replace("/auth");
+      return;
+    }
+    if (profile && !profile.onboarding_complete && pathname !== "/onboarding") {
+      router.replace("/onboarding");
+    }
+  }, [loading, user, profile, pathname, router]);
 
   if (loading) {
     return (
@@ -14,12 +29,12 @@ export function ProtectedRoute({ children }: { children: React.ReactNode }) {
     );
   }
 
-  if (!user) return <Navigate to="/auth" replace />;
+  if (!user) return null;
 
-  // If onboarding not complete, redirect — unless already on onboarding
-  if (profile && !profile.onboarding_complete && location.pathname !== "/onboarding") {
-    return <Navigate to="/onboarding" replace />;
+  if (profile && !profile.onboarding_complete && pathname !== "/onboarding") {
+    return null;
   }
 
   return <>{children}</>;
 }
+

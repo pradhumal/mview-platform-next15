@@ -1,7 +1,9 @@
+"use client";
+
 import { useState, useEffect, useCallback } from "react";
 import { Filter, Layers, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { EmptyState } from "@/components/EmptyState";
 import { FollowUpPrompts, mapPrompts, emptyStatePrompts } from "@/components/FollowUpPrompts";
 import { getMapFeatures, getMyMinerals, type MapFeature, type MineralInterest } from "@/lib/dataService";
@@ -128,7 +130,7 @@ export default function MapPage() {
             <p className="text-sm text-muted-foreground mb-4">
               {features.length} features ready to display. Connect a mapping service to enable interactive visualization.
             </p>
-            <Link to="/app/explore/activity">
+            <Link href="/app/explore/activity">
               <Button variant="outline" size="sm">
                 View related activity
               </Button>
