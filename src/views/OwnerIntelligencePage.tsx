@@ -265,7 +265,7 @@ export default function OwnerIntelligencePage() {
 
     // Handle "is anything important" question
     if (q.includes("important") && (q.includes("anything") || q.includes("something"))) {
-      const attentionItems = ctx?.unreadReports.filter((r) => r.status === "requires_attention") || [];
+      const attentionItems = ctx?.unreadReports.filter((r: { status: string }) => r.status === "requires_attention") || [];
       if (attentionItems.length > 0) {
         return {
           id: (Date.now() + 1).toString(),
@@ -377,7 +377,7 @@ export default function OwnerIntelligencePage() {
     }
 
     if (q.includes("do") && (q.includes("anything") || q.includes("need"))) {
-      const attentionItems = ctx?.unreadReports.filter((r) => r.status === "requires_attention") || [];
+      const attentionItems = ctx?.unreadReports.filter((r: { status: string; title: string; summary?: string; description?: string }) => r.status === "requires_attention") || [];
       if (attentionItems.length > 0) {
         return {
           id: (Date.now() + 1).toString(),

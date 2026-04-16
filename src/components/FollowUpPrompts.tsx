@@ -32,7 +32,7 @@ export function FollowUpPrompts({ prompts, context, className = "" }: FollowUpPr
         {prompts.slice(0, 3).map((prompt) => (
           <Link
             key={prompt}
-            to={buildUrl(prompt)}
+            href={buildUrl(prompt)}
             className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-secondary text-xs text-muted-foreground hover:text-foreground hover:bg-secondary/80 transition-colors"
           >
             {prompt}

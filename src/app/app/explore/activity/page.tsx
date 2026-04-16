@@ -1,4 +1,4 @@
-import ActivityPage from "@/pages/ActivityPage";
+import ActivityPage from "@/views/ActivityPage";
 
 export default function Page() {
   return <ActivityPage />;

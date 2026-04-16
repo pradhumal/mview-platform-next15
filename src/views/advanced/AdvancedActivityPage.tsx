@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useMemo } from "react";
 import { Activity, MapPin, Calendar, Building2, X } from "lucide-react";

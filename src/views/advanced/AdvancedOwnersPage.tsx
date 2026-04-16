@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { Users, Check, ChevronRight, User } from "lucide-react";
@@ -58,7 +58,7 @@ export default function AdvancedOwnersPage() {
                   </div>
                   <div className="flex items-center gap-2 mt-1">
                     <span className="text-2xs text-muted-foreground">{owner.interestCount} interest{owner.interestCount !== 1 ? "s" : ""}</span>
-                    <span className="text-2xs text-muted-foreground/40">·</span>
+                    <span className="text-2xs text-muted-foreground/40">┬╖</span>
                     <span className="text-2xs text-muted-foreground">{owner.lastSeen}</span>
                   </div>
                 </div>

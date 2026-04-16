@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { ShieldCheck, AlertTriangle, Clock, CheckCircle2, ArrowRight } from "lucide-react";
@@ -86,7 +86,7 @@ export default function AdvancedVerificationPage() {
               <div className="flex items-start justify-between gap-2 mb-3">
                 <div className="min-w-0">
                   <p className="text-sm font-medium text-foreground truncate">{item.mineralName}</p>
-                  <p className="text-2xs text-muted-foreground">{item.ownerName} · {item.county}</p>
+                  <p className="text-2xs text-muted-foreground">{item.ownerName} ┬╖ {item.county}</p>
                 </div>
                 <span className={`status-badge text-2xs flex-shrink-0 ${cfg.bg} ${cfg.color}`}>
                   <StatusIcon className="w-3 h-3" />

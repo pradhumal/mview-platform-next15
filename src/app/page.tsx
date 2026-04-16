@@ -1,4 +1,4 @@
-import LandingPage from "@/pages/public/LandingPage";
+import LandingPage from "@/views/public/LandingPage";
 import { PublicLayout } from "@/components/PublicLayout";
 
 export default function Page() {

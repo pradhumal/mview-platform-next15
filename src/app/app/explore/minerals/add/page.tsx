@@ -1,4 +1,4 @@
-import AddMineralPage from "@/pages/AddMineralPage";
+import AddMineralPage from "@/views/AddMineralPage";
 
 export default function Page() {
   return <AddMineralPage />;

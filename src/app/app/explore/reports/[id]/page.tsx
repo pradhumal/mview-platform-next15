@@ -1,4 +1,4 @@
-import ReportDetailPage from "@/pages/ReportDetailPage";
+import ReportDetailPage from "@/views/ReportDetailPage";
 
 export default function Page() {
   return <ReportDetailPage />;

@@ -1,4 +1,4 @@
-import TrustPage from "@/pages/public/TrustPage";
+import TrustPage from "@/views/public/TrustPage";
 import { PublicLayout } from "@/components/PublicLayout";
 
 export default function Page() {

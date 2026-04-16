@@ -1,4 +1,4 @@
-import ExplorePage from "@/pages/ExplorePage";
+import ExplorePage from "@/views/ExplorePage";
 
 export default function Page() {
   return <ExplorePage />;

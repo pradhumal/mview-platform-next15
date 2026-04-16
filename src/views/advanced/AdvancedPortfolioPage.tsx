@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { Briefcase, MapPin, ShieldCheck, AlertTriangle } from "lucide-react";
 import { mockMinerals } from "@/lib/mock";
@@ -15,7 +15,7 @@ const portfolioItems = mockMinerals.map((m) => ({
   ownerName: m.id === "min-1" || m.id === "min-2" ? "Johnson Family Trust" : m.id === "min-3" ? "Davis Estate" : "Unknown",
   ownerIdentity: (m.id === "min-1" ? "verified" : m.id === "min-2" ? "claimed" : "unverified") as "verified" | "claimed" | "unverified",
   ownershipClarity: (m.status === "producing" ? "clear" : "partial") as "clear" | "partial" | "unclear",
-  nriDisplay: m.nri ? `${(m.nri * 100).toFixed(4)}%` : "—",
+  nriDisplay: m.nri ? `${(m.nri * 100).toFixed(4)}%` : "ΓÇö",
 }));
 
 export default function AdvancedPortfolioPage() {

@@ -20,7 +20,7 @@ export function SourceLinkCard({ sourceLinks, objectsUsed, onNavigate }: SourceL
           {sourceLinks.map((link) => (
             <Link
               key={link.to}
-              to={link.to}
+              href={link.to}
               onClick={onNavigate}
               className="inline-flex items-center gap-1 text-xs text-primary font-medium hover:underline"
             >

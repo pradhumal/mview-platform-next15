@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { TrendingDown, Info } from "lucide-react";
@@ -113,10 +113,10 @@ export default function AdvancedDeclinePage() {
               <p className="text-xs font-medium text-foreground">Assumptions</p>
             </div>
             <ul className="space-y-1.5 text-xs text-muted-foreground">
-              <li>• Decline curve fitted using {summary.declineType} model</li>
-              <li>• Initial decline rate: {summary.initialDeclineRate}%</li>
-              <li>• Standard operating conditions assumed</li>
-              <li>• No workover or restimulation factored in</li>
+              <li>ΓÇó Decline curve fitted using {summary.declineType} model</li>
+              <li>ΓÇó Initial decline rate: {summary.initialDeclineRate}%</li>
+              <li>ΓÇó Standard operating conditions assumed</li>
+              <li>ΓÇó No workover or restimulation factored in</li>
             </ul>
           </div>
         </>
