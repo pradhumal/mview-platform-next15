@@ -10,14 +10,14 @@ interface Props {
 }
 
 const ownerNav = [
-  { icon: Sparkles, label: "Intelligence", to: "/app" },
+  { icon: Sparkles, label: "Intelligence", to: "/app/intelligence" },
   { icon: Compass, label: "Explore", to: "/app/explore" },
 ];
 
 const proNav = [
-  { icon: Sparkles, label: "Intelligence", to: "/app" },
+  { icon: Sparkles, label: "Intelligence", to: "/app/intelligence" },
   { icon: Compass, label: "Explore", to: "/app/explore" },
-  ...(featureFlags.advancedView ? [{ icon: Wrench, label: "Advanced", to: "/app/advanced" }] : []),
+  ...(featureFlags.advancedView ? [{ icon: Wrench, label: "Advanced", to: "/app/advanced/decline" }] : []),
 ];
 
 export function MViewBottomNav({ role }: Props) {
@@ -28,8 +28,8 @@ export function MViewBottomNav({ role }: Props) {
     <nav className="fixed bottom-0 left-0 right-0 z-30 md:hidden bg-nav border-t border-border/50 pb-safe">
       <div className="flex items-center justify-around px-2 py-2">
         {items.map((item) => {
-          const isActive = item.to === "/app"
-            ? pathname === "/app" || pathname === "/app/"
+          const isActive = item.to === "/app/intelligence"
+            ? pathname === "/app/intelligence" || pathname === "/app/intelligence/"
             : pathname.startsWith(item.to);
 
           return (

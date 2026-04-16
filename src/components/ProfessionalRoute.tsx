@@ -14,7 +14,7 @@ export function ProfessionalRoute({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (profile && profile.role !== "professional") {
-      router.replace("/app");
+      router.replace("/app/intelligence");
     }
   }, [profile, router]);
 

@@ -17,12 +17,12 @@ export function MViewDesktopSidebar({ role }: Props) {
   const isAdvancedSection = pathname.includes("/advanced");
 
   const mainNav = [
-    { icon: Sparkles, label: "Intelligence", to: "/app" },
+    { icon: Sparkles, label: "Intelligence", to: "/app/intelligence" },
     { icon: Compass, label: "Explore", to: "/app/explore" },
   ];
 
   if (role === "professional" && featureFlags.advancedView) {
-    mainNav.push({ icon: Wrench, label: "Advanced", to: "/app/advanced" });
+    mainNav.push({ icon: Wrench, label: "Advanced", to: "/app/advanced/decline" });
   }
 
   const exploreSubItems = [
@@ -39,13 +39,13 @@ export function MViewDesktopSidebar({ role }: Props) {
   ] : [];
 
   const isActive = (to: string) =>
-    to === "/app"
-      ? pathname === "/app" || pathname === "/app/"
+    to === "/app/intelligence"
+      ? pathname === "/app/intelligence" || pathname === "/app/intelligence/"
       : pathname.startsWith(to);
 
   return (
     <aside className="hidden md:flex flex-col w-56 h-screen sticky top-0 border-r border-border/50 bg-sidebar p-4">
-      <Link href="/app" className="flex items-center gap-2 px-2 mb-8">
+      <Link href="/app/intelligence" className="flex items-center gap-2 px-2 mb-8">
         <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
           <Sparkles className="w-4 h-4 text-primary" />
         </div>

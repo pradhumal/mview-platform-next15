@@ -30,23 +30,24 @@ export function MViewAppLayout({ children }: { children: React.ReactNode }) {
     return () => window.removeEventListener("open-intelligence", handler);
   }, []);
   
-  const isIntelligenceTab = pathname === "/app" || pathname === "/app/";
+  const isIntelligenceTab = pathname === "/app/intelligence" || pathname === "/app/intelligence/";
   const role = profile?.role || "owner";
   
   return (
     <div className="min-h-screen flex w-full bg-background">
       <MViewDesktopSidebar role={role} />
       
-      <main className="flex-1 pb-20 md:pb-0">
-        {/* Top bar with notification inbox + profile/settings */}
+      <main className="flex-1 pb-20 md:pb-0 pt-12">
         <div className="max-w-3xl mx-auto">
-          <div className="flex justify-end items-center gap-2 px-5 pt-4 md:px-8">
-            <NotificationInbox />
-            <SettingsSheet />
-          </div>
           {children}
         </div>
       </main>
+
+      {/* Notification + settings — fixed top-right, overlaid, no layout cost */}
+      <div className="fixed top-3 right-4 z-20 flex items-center gap-2">
+        <NotificationInbox />
+        <SettingsSheet />
+      </div>
       
       <MViewBottomNav role={role} />
       

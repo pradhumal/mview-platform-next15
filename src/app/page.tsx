@@ -1,10 +1,5 @@
-import LandingPage from "@/views/public/LandingPage";
-import { PublicLayout } from "@/components/PublicLayout";
+import { redirect } from "next/navigation";
 
-export default function Page() {
-  return (
-    <PublicLayout>
-      <LandingPage />
-    </PublicLayout>
-  );
+export default function RootPage() {
+  redirect("/app/intelligence");
 }

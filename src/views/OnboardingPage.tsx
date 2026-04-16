@@ -27,7 +27,7 @@ export default function OnboardingPage() {
 
     await refreshProfile();
     setLoading(false);
-    router.push("/app");
+    router.push("/app/intelligence");
   };
 
   const roleOptions: { value: RoleChoice; icon: typeof User; title: string; desc: string }[] = [

@@ -1,10 +1,5 @@
-import { Suspense } from "react";
-import OwnerIntelligencePage from "@/views/OwnerIntelligencePage";
+import { redirect } from "next/navigation";
 
-export default function Page() {
-  return (
-    <Suspense fallback={null}>
-      <OwnerIntelligencePage />
-    </Suspense>
-  );
+export default function AppPage() {
+  redirect("/app/intelligence");
 }

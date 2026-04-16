@@ -96,7 +96,7 @@ export default function DataExplorerPage() {
           <p className="text-xs text-muted-foreground">Intelligence can explain what changed and whether it matters</p>
         </div>
         <Link
-          href="/app"
+          href="/app/intelligence"
           className="flex items-center gap-1 text-sm text-primary font-medium hover:underline flex-shrink-0"
         >
           Ask

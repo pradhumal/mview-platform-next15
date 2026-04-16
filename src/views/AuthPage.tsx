@@ -27,7 +27,7 @@ export default function AuthPage() {
     if (error) {
       toast({ title: "Sign in failed", description: error.message, variant: "destructive" });
     } else {
-      router.push("/app");
+      router.push("/app/intelligence");
     }
   };
 
