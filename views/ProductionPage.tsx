@@ -7,6 +7,7 @@ import { AreaChart, Area, ResponsiveContainer, XAxis, YAxis, Tooltip } from "rec
 import { FollowUpPrompts, productionPrompts } from "@/components/FollowUpPrompts";
 import { getAllDeclineSummaries, getProductionSeries, type DeclineSummary, type ProductionSeries } from "@/lib/dataService";
 import { TravelingIntelligence } from "@/components/TravelingIntelligence";
+import { Events } from "@/lib/eventTracker";
 
 interface WellProductionData {
   summary: DeclineSummary;
@@ -52,6 +53,10 @@ export default function ProductionPage() {
   const [wellData, setWellData] = useState<WellProductionData[]>([]);
   const openIntelligence = useCallback(() => {
     window.dispatchEvent(new CustomEvent("open-intelligence"));
+  }, []);
+
+  useEffect(() => {
+    Events.productionView();
   }, []);
 
   useEffect(() => {

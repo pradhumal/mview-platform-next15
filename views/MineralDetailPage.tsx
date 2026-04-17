@@ -25,6 +25,7 @@ import {
   type Well,
   type ActivityEvent 
 } from "@/lib/dataService";
+import { Events } from "@/lib/eventTracker";
 
 const typeIcons = {
   permit: FileText,
@@ -84,7 +85,8 @@ export default function MineralDetailPage() {
   useEffect(() => {
     async function fetchData() {
       if (!id) return;
-      
+      Events.mineralView(id);
+
       try {
         const [mineralData, activityData] = await Promise.all([
           getMineralWithWells(id),

@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { FollowUpPrompts, reportPrompts } from "@/components/FollowUpPrompts";
 import { getReportDetail, type ReportDetail } from "@/lib/dataService";
 import ReactMarkdown from "react-markdown";
+import { Events } from "@/lib/eventTracker";
 
 export default function ReportDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -18,6 +19,7 @@ export default function ReportDetailPage() {
   useEffect(() => {
     async function fetchData() {
       if (!id) return;
+      Events.reportView(id);
       try {
         const data = await getReportDetail(id);
         setReport(data);

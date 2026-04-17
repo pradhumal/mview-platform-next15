@@ -8,6 +8,7 @@ import { ActivityCardSkeleton } from "@/components/LoadingSkeleton";
 import { FollowUpPrompts, activityPrompts, emptyStatePrompts } from "@/components/FollowUpPrompts";
 import { getActivityFeed, type ActivityEvent, type ActivityFilters } from "@/lib/dataService";
 import { TravelingIntelligence } from "@/components/TravelingIntelligence";
+import { Events } from "@/lib/eventTracker";
 
 type TimeFilter = "30" | "90" | "180";
 
@@ -48,6 +49,10 @@ export default function ActivityPage() {
   const [typeFilter, setTypeFilter] = useState<ActivityEvent["type"] | "all">("all");
   const openIntelligence = useCallback(() => {
     window.dispatchEvent(new CustomEvent("open-intelligence"));
+  }, []);
+
+  useEffect(() => {
+    Events.activityView();
   }, []);
 
   useEffect(() => {

@@ -20,21 +20,31 @@ import {
   type ParsedStatement,
 } from "@/lib/dataService";
 import { useAuth } from "@/contexts/AuthContext";
+import { usePersona } from "@/contexts/PersonaContext";
+import { Events } from "@/lib/eventTracker";
+import { buildIntelligenceContextPacket, invalidatePersonaCache } from "@/lib/personaClient";
 import { getSessionMemory, saveExchange, type SessionMemory } from "@/lib/conversationMemory";
 
-// First-time visitor prompts - orientation-level, trust-forming
-const firstTimePrompts = [
-  { text: "What do you see about my minerals?", icon: Eye },
-  { text: "Is anything important happening right now?", icon: Bell },
-  { text: "How does MineralView work?", icon: HelpCircle },
-];
-
-// Returning/engaged user prompts - diagnostic and interpretive
-const returningPrompts = [
-  { text: "What changed near me?", icon: MapPin },
-  { text: "Is this decline normal?", icon: TrendingDown },
-  { text: "Do I need to do anything?", icon: FileText },
-];
+// Icon map for persona prompt starters — UI concern, keyed by intent_slug
+const STARTER_ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
+  portfolio_overview: Eye,
+  activity_alert_check: Bell,
+  platform_orientation: HelpCircle,
+  nearby_activity_check: MapPin,
+  decline_interpretation: TrendingDown,
+  action_required_check: FileText,
+  production_decline_cause: TrendingDown,
+  concern_triage: Bell,
+  production_trend_summary: TrendingDown,
+  activity_by_interest: MapPin,
+  regulatory_deadline_check: FileText,
+  decline_analysis: TrendingDown,
+  eur_per_acre_lookup: TrendingDown,
+  mvestimate_comparison: TrendingDown,
+  client_alert_summary: Bell,
+  portfolio_npv_by_client: TrendingDown,
+  verification_status_check: FileText,
+};
 
 interface EmbeddedEvidence {
   type: "production-chart" | "activity-map" | "statement-summary";
@@ -56,6 +66,7 @@ type ContextMode = "simple" | "detailed";
 export default function OwnerIntelligencePage() {
   const searchParams = useSearchParams();
   const { user } = useAuth();
+  const { config } = usePersona();
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -185,6 +196,14 @@ export default function OwnerIntelligencePage() {
       localStorage.setItem("mineralview_engaged", "true");
     }
 
+    // Build context packet and fire intelligence query event
+    const contextPacket = await buildIntelligenceContextPacket(user?.id ?? null);
+    Events.intelligenceQuerySubmitted({
+      query_text: text,
+      context_mode: contextMode,
+      persona_type: contextPacket.persona_type,
+    });
+
     const userMessage: Message = {
       id: Date.now().toString(),
       role: "user",
@@ -200,6 +219,7 @@ export default function OwnerIntelligencePage() {
       const response = await generateContextualResponse(text, contextMode, context);
       setMessages((prev) => [...prev, response]);
       setIsLoading(false);
+      invalidatePersonaCache();
 
       // Persist to conversation memory
       if (user) {
@@ -211,7 +231,7 @@ export default function OwnerIntelligencePage() {
         }).catch(console.error);
       }
     }, 1200);
-  }, [contextMode, context, isEngaged]);
+  }, [contextMode, context, isEngaged, user]);
 
   const generateContextualResponse = async (
     question: string,
@@ -498,18 +518,21 @@ export default function OwnerIntelligencePage() {
                 {isEngaged ? "Or try asking:" : "Try asking:"}
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                {(isEngaged ? returningPrompts : firstTimePrompts).map((suggestion) => (
-                  <Button
-                    key={suggestion.text}
-                    onClick={() => handleSend(suggestion.text)}
-                    className="flex items-center gap-3 p-8 rounded-xl bg-card border border-border/50 text-left hover:border-primary/30 hover:bg-card/80 transition-all group"
-                  >
-                    <div className="w-9 h-9 rounded-full bg-secondary flex items-center justify-center flex-shrink-0 group-hover:bg-primary/10 transition-colors">
-                      <suggestion.icon className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
-                    </div>
-                    <span className="text-sm text-foreground">{suggestion.text}</span>
-                  </Button>
-                ))}
+                {config.promptStarters.map((starter) => {
+                  const StarterIcon = STARTER_ICON_MAP[starter.intent_slug] ?? Sparkles;
+                  return (
+                    <Button
+                      key={starter.text}
+                      onClick={() => handleSend(starter.text)}
+                      className="flex items-center gap-3 p-8 rounded-xl bg-card border border-border/50 text-left hover:border-primary/30 hover:bg-card/80 transition-all group"
+                    >
+                      <div className="w-9 h-9 rounded-full bg-secondary flex items-center justify-center flex-shrink-0 group-hover:bg-primary/10 transition-colors">
+                        <StarterIcon className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
+                      </div>
+                      <span className="text-sm text-foreground">{starter.text}</span>
+                    </Button>
+                  );
+                })}
               </div>
             </div>
 
@@ -644,7 +667,10 @@ export default function OwnerIntelligencePage() {
                           {message.followUpPrompts.slice(0, 3).map((prompt) => (
                             <button
                               key={prompt}
-                              onClick={() => handleSend(prompt)}
+                              onClick={() => {
+                                Events.intelligenceFollowupClick(prompt);
+                                handleSend(prompt);
+                              }}
                               className="inline-flex items-center px-3 py-1.5 rounded-full bg-secondary text-xs text-muted-foreground hover:text-foreground hover:bg-secondary/80 transition-colors"
                             >
                               {prompt}

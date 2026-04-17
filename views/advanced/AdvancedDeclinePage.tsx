@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { Info, BarChart2, MapPin, User } from "lucide-react";
 import { mockDeclineSummaries, mockProductionSeries, mockMinerals, mockWells } from "@/lib/mock";
 import {
@@ -17,6 +17,7 @@ import {
   Cell,
 } from "recharts";
 import { TravelingIntelligence } from "@/components/TravelingIntelligence";
+import { Events } from "@/lib/eventTracker";
 
 const FIT_QUALITY_STYLE = {
   strong: "bg-success/15 text-success",
@@ -51,6 +52,10 @@ export default function AdvancedDeclinePage() {
 
   const openIntelligence = useCallback(() => {
     window.dispatchEvent(new CustomEvent("open-intelligence"));
+  }, []);
+
+  useEffect(() => {
+    Events.advancedToolView("decline_workbench");
   }, []);
 
   const summary = mockDeclineSummaries.find((d) => d.wellId === selectedWell);

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, useEffect } from "react";
 import {
   User,
   FileText,
@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { mockMinerals } from "@/lib/mock";
 import { TravelingIntelligence } from "@/components/TravelingIntelligence";
+import { Events } from "@/lib/eventTracker";
 
 // ── Mock owner data ────────────────────────────────────────────────────────
 interface Owner {
@@ -160,6 +161,10 @@ export default function AdvancedOwnersPage() {
 
   const openIntelligence = useCallback(() => {
     window.dispatchEvent(new CustomEvent("open-intelligence"));
+  }, []);
+
+  useEffect(() => {
+    Events.advancedToolView("owners");
   }, []);
 
   const selectedOwner = mockOwners.find((o) => o.id === selectedOwnerId)!;
