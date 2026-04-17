@@ -13,11 +13,11 @@ export function ProtectedRoute({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (loading) return;
     if (!user) {
-      router.replace("/app/auth");
+      router.replace("/auth");
       return;
     }
-    if (profile && !profile.onboarding_complete && pathname !== "/app/onboarding") {
-      router.replace("/app/onboarding");
+    if (profile && !profile.onboarding_complete && pathname !== "/onboarding") {
+      router.replace("/onboarding");
     }
   }, [loading, user, profile, pathname, router]);
 
@@ -31,7 +31,7 @@ export function ProtectedRoute({ children }: { children: React.ReactNode }) {
 
   if (!user) return null;
 
-  if (profile && !profile.onboarding_complete && pathname !== "/app/onboarding") {
+  if (profile && !profile.onboarding_complete && pathname !== "/onboarding") {
     return null;
   }
 

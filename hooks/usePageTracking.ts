@@ -18,8 +18,8 @@ function sectionFromPath(pathname: string): SectionType {
   if (pathname.startsWith("/app/intelligence")) return "intelligence";
   if (pathname.startsWith("/app/explore")) return "explore";
   if (pathname.startsWith("/app/advanced")) return "advanced";
-  if (pathname.startsWith("/app/auth")) return "auth";
-  if (pathname.startsWith("/app/onboarding")) return "onboarding";
+  if (pathname.startsWith("/auth")) return "auth";
+  if (pathname.startsWith("/onboarding")) return "onboarding";
   return null;
 }
 

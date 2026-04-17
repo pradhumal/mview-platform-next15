@@ -26,7 +26,7 @@ export default function ResetPasswordPage() {
       toast({ title: "Error", description: error.message, variant: "destructive" });
     } else {
       toast({ title: "Password updated", description: "You can now sign in." });
-      router.push("/app/auth");
+      router.push("/auth");
     }
   };
 
