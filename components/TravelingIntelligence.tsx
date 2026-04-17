@@ -8,10 +8,12 @@ import type { PageContext } from "@/hooks/useIntelligenceContext";
 import { useAuth } from "@/contexts/AuthContext";
 
 interface TravelingIntelligenceProps {
-  /** Which Explore sub-page is this rendered on */
-  subPage: "explore" | "map" | "production" | "reports" | "activity";
+  /** Which page/sub-page is this rendered on */
+  subPage: "explore" | "map" | "production" | "reports" | "activity" | "advanced" | "decline" | "owners" | "portfolio";
   /** Callback to open the full Intelligence sheet */
   onOpenIntelligence?: () => void;
+  /** Optional entity context (e.g. selected well or owner) */
+  entityLabel?: string;
   className?: string;
 }
 
@@ -21,18 +23,23 @@ const confidenceColors: Record<string, string> = {
   low: "bg-muted text-muted-foreground",
 };
 
-export function TravelingIntelligence({ subPage, onOpenIntelligence, className = "" }: TravelingIntelligenceProps) {
+export function TravelingIntelligence({ subPage, onOpenIntelligence, entityLabel, className = "" }: TravelingIntelligenceProps) {
   const { user, profile } = useAuth();
   const [response, setResponse] = useState<IntelligenceResponse | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  const advancedPages = new Set(["advanced", "decline", "owners", "portfolio"]);
+
   const pageContext = useMemo<PageContext>(() => ({
-    label: subPage.charAt(0).toUpperCase() + subPage.slice(1),
-    path: subPage === "explore" ? "/app/explore" : `/app/explore/${subPage}`,
-    section: "explore" as const,
-    subPage: subPage === "explore" ? undefined : subPage,
+    label: entityLabel ?? (subPage.charAt(0).toUpperCase() + subPage.slice(1)),
+    path: advancedPages.has(subPage)
+      ? (subPage === "advanced" ? "/app/advanced" : `/app/advanced/${subPage}`)
+      : (subPage === "explore" ? "/app/explore" : `/app/explore/${subPage}`),
+    section: advancedPages.has(subPage) ? "advanced" as const : "explore" as const,
+    subPage: subPage === "explore" || subPage === "advanced" ? undefined : subPage,
     timestamp: Date.now(),
-  }), [subPage]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }), [subPage, entityLabel]);
 
   useEffect(() => {
     let cancelled = false;
@@ -50,6 +57,8 @@ export function TravelingIntelligence({ subPage, onOpenIntelligence, className =
     }
     load();
     return () => { cancelled = true; };
+  // profile?.role and user?.id are intentionally omitted — we don't want to re-fetch on every auth state tick
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageContext]);
 
   if (isLoading) {

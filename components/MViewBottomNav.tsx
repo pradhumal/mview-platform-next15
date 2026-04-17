@@ -3,26 +3,20 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Sparkles, Compass, Wrench } from "lucide-react";
-import { featureFlags } from "@/lib/featureFlags";
 
 interface Props {
   role: "owner" | "professional";
 }
 
-const ownerNav = [
+const navItems = [
   { icon: Sparkles, label: "Intelligence", to: "/app/intelligence" },
   { icon: Compass, label: "Explore", to: "/app/explore" },
+  { icon: Wrench, label: "Advanced", to: "/app/advanced" },
 ];
 
-const proNav = [
-  { icon: Sparkles, label: "Intelligence", to: "/app/intelligence" },
-  { icon: Compass, label: "Explore", to: "/app/explore" },
-  ...(featureFlags.advancedView ? [{ icon: Wrench, label: "Advanced", to: "/app/advanced/decline" }] : []),
-];
-
-export function MViewBottomNav({ role }: Props) {
+export function MViewBottomNav({ role: _role }: Props) {
   const pathname = usePathname();
-  const items = role === "professional" ? proNav : ownerNav;
+  const items = navItems;
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-30 md:hidden bg-nav border-t border-border/50 pb-safe">

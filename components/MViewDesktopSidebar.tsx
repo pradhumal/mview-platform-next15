@@ -2,28 +2,24 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Sparkles, Compass, Wrench, Map, Activity, Layers, FileText, LogOut } from "lucide-react";
+import { Sparkles, Compass, Wrench, Map, Activity, Layers, FileText, LogOut, TrendingDown, Users, Briefcase } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
-import { featureFlags } from "@/lib/featureFlags";
 
 interface Props {
   role: "owner" | "professional";
 }
 
-export function MViewDesktopSidebar({ role }: Props) {
+export function MViewDesktopSidebar({ role: _role }: Props) {
   const pathname = usePathname();
-  const { signOut, profile } = useAuth();
+  const { signOut } = useAuth();
   const isExploreSection = pathname.includes("/explore");
   const isAdvancedSection = pathname.includes("/advanced");
 
   const mainNav = [
     { icon: Sparkles, label: "Intelligence", to: "/app/intelligence" },
     { icon: Compass, label: "Explore", to: "/app/explore" },
+    { icon: Wrench, label: "Advanced", to: "/app/advanced" },
   ];
-
-  if (role === "professional" && featureFlags.advancedView) {
-    mainNav.push({ icon: Wrench, label: "Advanced", to: "/app/advanced/decline" });
-  }
 
   const exploreSubItems = [
     { icon: Map, label: "Map", to: "/app/explore/map" },
@@ -32,11 +28,13 @@ export function MViewDesktopSidebar({ role }: Props) {
     { icon: Layers, label: "Activity", to: "/app/explore/activity" },
   ];
 
-  const advancedSubItems = featureFlags.advancedView ? [
-    { icon: Layers, label: "Owners", to: "/app/advanced/owners" },
-    { icon: Activity, label: "Portfolio", to: "/app/advanced/portfolio" },
+  const advancedSubItems = [
+    { icon: TrendingDown, label: "Decline", to: "/app/advanced/decline" },
+    { icon: Briefcase, label: "Portfolio", to: "/app/advanced/portfolio" },
+    { icon: Users, label: "Owners", to: "/app/advanced/owners" },
     { icon: FileText, label: "Reports", to: "/app/advanced/reports" },
-  ] : [];
+    { icon: Activity, label: "Activity", to: "/app/advanced/activity" },
+  ];
 
   const isActive = (to: string) =>
     to === "/app/intelligence"

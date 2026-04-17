@@ -1,12 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback } from "react";
 import Link from "next/link";
 import {
   Users, TrendingDown, FileText, Activity, Briefcase, ShieldCheck,
-  ChevronRight, ArrowRight
+  ChevronRight,
 } from "lucide-react";
 import { mockMinerals } from "@/lib/mock";
+import { TravelingIntelligence } from "@/components/TravelingIntelligence";
 
 const sections = [
   { icon: Users, label: "Manage Owners", to: "/app/advanced/owners", desc: "Switch active owner, view portfolio" },
@@ -19,13 +20,19 @@ const sections = [
 
 export default function AdvancedViewPage() {
   const counties = [...new Set(mockMinerals.map((m) => m.county))];
+  const openIntelligence = useCallback(() => {
+    window.dispatchEvent(new CustomEvent("open-intelligence"));
+  }, []);
 
   return (
     <div className="px-4 py-6 md:px-8 animate-fade-in">
       <h1 className="text-xl font-medium text-foreground mb-1">Advanced View</h1>
-      <p className="text-sm text-muted-foreground mb-6">
+      <p className="text-sm text-muted-foreground mb-4">
         Professional tools for portfolio management and analysis.
       </p>
+
+      {/* TravelingIntelligence — first before stats and section list */}
+      <TravelingIntelligence subPage="advanced" onOpenIntelligence={openIntelligence} className="mb-6" />
 
       {/* Summary strip */}
       <div className="grid grid-cols-3 gap-2 mb-6">

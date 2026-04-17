@@ -454,7 +454,7 @@ export default function OwnerIntelligencePage() {
               <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6">
                 <Sparkles className="w-7 h-7 text-primary" />
               </div>
-              <h1 className="text-2xl md:text-3xl font-bold text-foreground mb-3">
+              <h1 className="text-2xl md:text-3xl font-medium text-foreground mb-3">
                 What would you like to understand today?
               </h1>
               <p className="text-sm text-muted-foreground max-w-sm mx-auto leading-relaxed">
@@ -479,12 +479,12 @@ export default function OwnerIntelligencePage() {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   placeholder="Ask about your minerals..."
-                  className="flex-1 h-12 px-5 bg-secondary rounded-full text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 transition-shadow"
+                  className="flex-1 h-12 px-5 bg-secondary rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 transition-shadow"
                 />
                 <Button
                   type="submit"
                   size="icon"
-                  className="h-12 w-12 rounded-full flex-shrink-0"
+                  className="h-12 w-12 rounded-xl flex-shrink-0"
                   disabled={!input.trim() || isLoading}
                 >
                   <Send className="w-4 h-4" />
@@ -502,7 +502,7 @@ export default function OwnerIntelligencePage() {
                   <Button
                     key={suggestion.text}
                     onClick={() => handleSend(suggestion.text)}
-                    className="flex items-center gap-3 p-6 rounded-xl bg-card border border-border/50 text-left hover:border-primary/30 hover:bg-card/80 transition-all group"
+                    className="flex items-center gap-3 p-8 rounded-xl bg-card border border-border/50 text-left hover:border-primary/30 hover:bg-card/80 transition-all group"
                   >
                     <div className="w-9 h-9 rounded-full bg-secondary flex items-center justify-center flex-shrink-0 group-hover:bg-primary/10 transition-colors">
                       <suggestion.icon className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
