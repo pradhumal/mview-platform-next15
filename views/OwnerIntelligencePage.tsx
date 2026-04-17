@@ -440,24 +440,25 @@ export default function OwnerIntelligencePage() {
           <div className="px-5 py-8 md:px-8 md:py-12 animate-fade-in">
             {/* Session continuity banner */}
             {memory?.hasHistory && (
-              <div className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-primary/5 border border-primary/10 max-w-md mx-auto mb-6">
-                <History className="w-4 h-4 text-primary flex-shrink-0" />
-                <p className="text-xs text-primary">
+              <div className="flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-secondary max-w-xs mx-auto mb-8">
+                <History className="w-4 h-4 text-muted-foreground flex-shrink-0" />
+                <p className="text-xs text-muted-foreground">
                   Continuing from your last session
                   {memory.lastEntityLabel ? ` — last discussed ${memory.lastEntityLabel}` : ""}
                 </p>
               </div>
             )}
+
             {/* Welcome Header */}
-            <div className="text-center mb-10">
-              <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+            <div className="text-center mb-8">
+              <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6">
                 <Sparkles className="w-7 h-7 text-primary" />
               </div>
-              <h1 className="text-xl md:text-2xl text-foreground mb-2">
+              <h1 className="text-2xl md:text-3xl font-bold text-foreground mb-3">
                 What would you like to understand today?
               </h1>
-              <p className="text-sm text-muted-foreground max-w-md mx-auto">
-                {isEngaged 
+              <p className="text-sm text-muted-foreground max-w-sm mx-auto leading-relaxed">
+                {isEngaged
                   ? "Ask about activity near your minerals, production changes, or anything you're wondering about."
                   : "You can ask about your minerals, recent activity, or how MineralView works."
                 }
@@ -465,7 +466,7 @@ export default function OwnerIntelligencePage() {
             </div>
 
             {/* Text Input */}
-            <div className="max-w-lg mx-auto mb-8">
+            <div className="max-w-lg mx-auto mb-6">
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
@@ -478,36 +479,36 @@ export default function OwnerIntelligencePage() {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   placeholder="Ask about your minerals..."
-                  className="flex-1 h-12 px-4 bg-secondary rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 transition-shadow"
+                  className="flex-1 h-12 px-5 bg-secondary rounded-full text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 transition-shadow"
                 />
                 <Button
                   type="submit"
                   size="icon"
-                  className="h-12 w-12 rounded-xl flex-shrink-0"
+                  className="h-12 w-12 rounded-full flex-shrink-0"
                   disabled={!input.trim() || isLoading}
                 >
-                  <Send className="w-5 h-5" />
+                  <Send className="w-4 h-4" />
                 </Button>
               </form>
             </div>
 
             {/* Suggested Prompts */}
-            <div className="max-w-lg mx-auto mb-8">
+            <div className="max-w-lg mx-auto mb-6">
               <p className="text-xs text-muted-foreground mb-3 text-center">
                 {isEngaged ? "Or try asking:" : "Try asking:"}
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 {(isEngaged ? returningPrompts : firstTimePrompts).map((suggestion) => (
-                  <button
+                  <Button
                     key={suggestion.text}
                     onClick={() => handleSend(suggestion.text)}
-                    className="flex items-center gap-3 p-4 rounded-xl bg-card border border-border/50 text-left hover:border-primary/30 hover:bg-card/80 transition-all group"
+                    className="flex items-center gap-3 p-6 rounded-xl bg-card border border-border/50 text-left hover:border-primary/30 hover:bg-card/80 transition-all group"
                   >
                     <div className="w-9 h-9 rounded-full bg-secondary flex items-center justify-center flex-shrink-0 group-hover:bg-primary/10 transition-colors">
                       <suggestion.icon className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
                     </div>
                     <span className="text-sm text-foreground">{suggestion.text}</span>
-                  </button>
+                  </Button>
                 ))}
               </div>
             </div>
