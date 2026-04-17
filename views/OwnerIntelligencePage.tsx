@@ -521,16 +521,17 @@ export default function OwnerIntelligencePage() {
                 {config.promptStarters.map((starter) => {
                   const StarterIcon = STARTER_ICON_MAP[starter.intent_slug] ?? Sparkles;
                   return (
-                    <Button
+                    <button
                       key={starter.text}
+                      type="button"
                       onClick={() => handleSend(starter.text)}
-                      className="flex items-center gap-3 p-8 rounded-xl bg-card border border-border/50 text-left hover:border-primary/30 hover:bg-card/80 transition-all group"
+                      className="flex items-center gap-3 px-4 py-3 rounded-xl bg-card border border-border/50 text-left hover:border-primary/30 hover:bg-card/80 transition-all group w-full"
                     >
                       <div className="w-9 h-9 rounded-full bg-secondary flex items-center justify-center flex-shrink-0 group-hover:bg-primary/10 transition-colors">
                         <StarterIcon className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
                       </div>
                       <span className="text-sm text-foreground">{starter.text}</span>
-                    </Button>
+                    </button>
                   );
                 })}
               </div>
