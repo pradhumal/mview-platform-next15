@@ -7,6 +7,7 @@ import { MViewDesktopSidebar } from "./MViewDesktopSidebar";
 import { IntelligencePanel } from "./IntelligencePanel";
 import { NotificationInbox } from "./NotificationInbox";
 import { SettingsSheet } from "./SettingsSheet";
+import Link from "next/link";
 import { Sparkles } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { touchOwnerLastSeen } from "@/lib/dataService";
@@ -43,8 +44,17 @@ export function MViewAppLayout({ children }: { children: React.ReactNode }) {
         </div>
       </main>
 
-      {/* Notification + settings — fixed top-right, overlaid, no layout cost */}
-      <div className="fixed top-3 right-4 z-20 flex items-center gap-2">
+      {/* Top bar: wordmark left, actions right — mobile only (md: hidden via sidebar) */}
+      <div className="fixed top-0 left-0 right-0 h-12 z-20 flex items-center justify-between px-4 bg-background/95 backdrop-blur-sm border-b border-border/40 md:hidden">
+        <Link href="/app/intelligence" className="text-sm font-semibold text-foreground tracking-tight hover:text-primary transition-colors">MineralView</Link>
+        <div className="flex items-center gap-2">
+          <NotificationInbox />
+          <SettingsSheet />
+        </div>
+      </div>
+
+      {/* Notification + settings — desktop only (sidebar handles nav) */}
+      <div className="fixed top-3 right-4 z-20 hidden md:flex items-center gap-2">
         <NotificationInbox />
         <SettingsSheet />
       </div>
