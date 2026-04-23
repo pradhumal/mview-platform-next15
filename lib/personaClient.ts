@@ -18,17 +18,21 @@
  */
 
 import { supabase } from "@/integrations/supabase/client";
+import type { ValidatedStarter } from "@/lib/personaConfigs";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
+// Canonical persona IDs — must match persona_id enum in Supabase prompt_starters table exactly.
+// Source: Prompt_starters_supabase_schema_v1.docx (Aboli, 2026-04-22)
 export type PersonaType =
-  | "first_time_visitor"
-  | "engaged_owner"
-  | "concerned_owner"
-  | "active_manager"
-  | "professional_landman"
-  | "estate_manager"
-  | "unknown";
+  | "legacy_inherited_owner"
+  | "passive_income_owner"
+  | "active_deal_seeking_owner"
+  | "sophisticated_portfolio_owner"
+  | "distrustful_burned_owner"
+  | "landman_acquisition_analyst"
+  | "estate_mineral_manager"
+  | "unknown"; // local fallback — not in DB enum
 
 export type BehavioralState =
   | "orienting"
@@ -154,22 +158,71 @@ export function invalidatePersonaCache(): void {
   cacheUserId = null;
 }
 
-// ─── Admin-managed config hydration (stub — awaiting schema from Aboli) ───────
+// ─── DB → UI mapping ──────────────────────────────────────────────────────────
 
 /**
- * STUB — do not implement until Aboli posts the Supabase schema
- * for the admin-managed persona config table and prompt starters.
- *
- * When implemented, this will:
- *   1. Call the platform-config edge function at session start
- *   2. Return prompt starters and feature overrides for the current persona
- *   3. Feed into usePersona() to replace static personaConfigs.ts entries
+ * Map a prompt_starters DB row to the unified ValidatedStarter shape.
+ * This is the ONLY place the DB field names are translated to UI field names.
+ * UI components always read ValidatedStarter — never raw DB rows.
  */
-export async function hydratePersonaConfigFromSupabase(
-  _userId: string,
-  _personaType: PersonaType
-): Promise<null> {
-  // TODO: implement after schema is agreed with Aboli
-  // Expected return: { promptStarters: PromptStarter[], featureOverrides: FeatureOverrides }
-  return null;
+export function mapDbToStarter(row: {
+  id: string;
+  prompt_text: string;
+  follow_ups: string[] | null;
+  workflow: string;
+  surface: string;
+  campaign: string;
+  display_order: number;
+}): ValidatedStarter {
+  return {
+    id: row.id,
+    text: row.prompt_text,
+    follow_ups: row.follow_ups ?? [],
+    intent_slug: row.workflow,
+    surface: row.surface,
+    campaign: row.campaign,
+    display_order: row.display_order,
+  };
+}
+
+// ─── Supabase prompt starters read layer ─────────────────────────────────────
+
+/**
+ * Fetch active prompt starters for a persona from the prompt_starters table.
+ * Returns null if the table is unreachable — caller falls back to personaConfigs.ts.
+ *
+ * Requires: prompt_starters table + RLS migration applied in Supabase.
+ * Schema source: Prompt_starters_supabase_schema_v1.docx (Aboli, 2026-04-22)
+ *
+ * @param personaType  Canonical persona ID matching the persona_id DB enum.
+ * @param isProfessional  Pass true for landman/estate personas to include gated rows.
+ */
+export async function fetchPromptStarters(
+  personaType: PersonaType,
+  isProfessional = false
+): Promise<ValidatedStarter[] | null> {
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let query = (supabase as any)
+      .from("prompt_starters")
+      .select("id, prompt_text, follow_ups, workflow, surface, campaign, display_order")
+      .eq("persona_type", personaType)
+      .eq("is_active", true)
+      .order("display_order", { ascending: true });
+
+    if (!isProfessional) {
+      query = query.eq("requires_professional_gate", false);
+    }
+
+    const { data, error } = await query;
+
+    if (error || !data || data.length === 0) {
+      return null;
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return (data as any[]).map(mapDbToStarter);
+  } catch {
+    return null;
+  }
 }

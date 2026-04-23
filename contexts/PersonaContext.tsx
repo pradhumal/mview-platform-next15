@@ -31,6 +31,7 @@ import {
 import { useAuth } from "@/contexts/AuthContext";
 import {
   getPersonaState,
+  fetchPromptStarters,
   invalidatePersonaCache,
   type PersonaState,
 } from "@/lib/personaClient";
@@ -81,11 +82,21 @@ export function PersonaProvider({ children }: { children: ReactNode }) {
       }
       if (!cancelled) setIsLoading(true);
       const state = await getPersonaState(user.id);
-      // TODO: after schema agreed with Aboli — overlay admin config here:
-      // const adminConfig = await hydratePersonaConfigFromSupabase(user.id, state.persona_type);
+      const staticConfig = getPersonaConfig(state.persona_type);
+
+      // Try Supabase prompt_starters table — fall back silently to static config
+      const isProfessional =
+        state.persona_type === "landman_acquisition_analyst" ||
+        state.persona_type === "estate_mineral_manager";
+      const liveStarters = await fetchPromptStarters(state.persona_type, isProfessional);
+
       if (!cancelled) {
         setPersonaState(state);
-        setConfig(getPersonaConfig(state.persona_type));
+        setConfig(
+          liveStarters
+            ? { ...staticConfig, promptStarters: liveStarters }
+            : staticConfig
+        );
         setIsLoading(false);
       }
     }

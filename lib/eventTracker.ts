@@ -14,6 +14,7 @@
  */
 
 import { supabase } from "@/integrations/supabase/client";
+import { getSessionId, getAnonymousId } from "@/lib/session";
 
 // ─── Canonical event types ────────────────────────────────────────────────────
 
@@ -85,28 +86,6 @@ export interface TrackEventPayload {
   page_path?: string;
   section?: SectionType;
   metadata?: Record<string, unknown>;
-}
-
-// ─── Session ID (anonymous, per-tab) ─────────────────────────────────────────
-
-function getSessionId(): string {
-  if (typeof window === "undefined") return "ssr";
-  let sid = sessionStorage.getItem("mv_session_id");
-  if (!sid) {
-    sid = crypto.randomUUID();
-    sessionStorage.setItem("mv_session_id", sid);
-  }
-  return sid;
-}
-
-function getAnonymousId(): string {
-  if (typeof window === "undefined") return "ssr";
-  let aid = localStorage.getItem("mv_anonymous_id");
-  if (!aid) {
-    aid = crypto.randomUUID();
-    localStorage.setItem("mv_anonymous_id", aid);
-  }
-  return aid;
 }
 
 // ─── Core tracker ─────────────────────────────────────────────────────────────
@@ -270,8 +249,8 @@ export const Events = {
       metadata: { milestone_percent: milestone },
     }),
 
-  sessionStarted: () =>
-    track({ event_type: "session_started", section: null }),
+  sessionStarted: (metadata?: Record<string, unknown>) =>
+    track({ event_type: "session_started", section: null, metadata }),
 
   signIn: () =>
     track({ event_type: "sign_in", section: "auth" }),

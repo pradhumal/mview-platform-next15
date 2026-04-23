@@ -14,16 +14,30 @@
 import { useEffect } from "react";
 import { usePageTracking } from "@/hooks/usePageTracking";
 import { Events } from "@/lib/eventTracker";
+import { getOrCreateSession } from "@/lib/session";
+import { captureEntryContext } from "@/lib/entryContext";
 
 export function SessionBootstrap() {
   usePageTracking();
 
   useEffect(() => {
-    const key = "mv_session_started";
     if (typeof window === "undefined") return;
-    if (sessionStorage.getItem(key)) return;
-    sessionStorage.setItem(key, "1");
-    Events.sessionStarted();
+
+    const session = getOrCreateSession();
+    if (!session.is_new_session) return;
+
+    // Capture entry context on new session creation
+    const entryCtx = captureEntryContext();
+
+    Events.sessionStarted({
+      entry_path: session.entry_path,
+      session_start: session.session_start,
+      referrer: entryCtx.referrer,
+      utm_source: entryCtx.utm_source,
+      utm_medium: entryCtx.utm_medium,
+      utm_campaign: entryCtx.utm_campaign,
+      device_type: entryCtx.device_type,
+    });
   }, []);
 
   return null;
